@@ -1,0 +1,102 @@
+
+
+.css-1uahbf {
+    background: #fff;
+    position: relative;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    z-index: 2;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+  }
+  .css-1uahbf .subMegaMenu_main {
+    height: 50px;
+  }
+  .subMegaMenu_main {
+    position: relative;
+    z-index: 16000003;
+    background: #fff;
+    width: 81.25em !important;
+  }
+  .css-12k99am {
+    margin: 0 auto;
+  }
+  .css-1uahbf .Addbdr {
+    display: none;
+  }
+  .Addbdr {
+    border-bottom: 1px solid #e6dede;
+    width: 100%;
+    position: relative;
+    z-index: 16000003;
+  }
+  .subMegaMenu_main .MegaDropdownHeading {
+    box-shadow: none !important;
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .css-1uahbf .MegaDropdownHeading {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .MegaDropdownHeading {
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    height: 50px;
+    line-height: 47px;
+    position: relative;
+  }
+  @media (max-width: 1024px) {
+    #header_id .subMegaMenu_main .MegaDropdownHeading .MegaDropdownHeadingbox {
+        padding: 0 !important;
+    }
+  }
+  @media (max-width: 1024px) {
+    #header_id .megaMenu_main > ul > li {
+        padding: 0 !important;
+    }
+  }
+  #header_id .MegaDropdownHeadingbox {
+    font-family: inherit;
+  }
+  .subMegaMenu_main .MegaDropdownHeading .MegaDropdownHeadingbox {
+    width: auto;
+    padding: 0;
+    margin: 0;
+    float: left;
+    padding: 0 14px !important;
+  }
+  .MegaDropdownHeading .MegaDropdownHeadingbox {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+    color: rgba(3, 2, 26, 0.6);
+    text-transform: capitalize;
+    display: inline-block;
+    vertical-align: middle;
+    border-bottom: 3px solid transparent;
+    width: auto;
+  }
+  .megaMenu_main > ul > li {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 11px !important;
+  }
+  .MegaDropdown-ContentInner:first-child, .MegaDropdowntopWrapper .LuxeSubmenuWrapperbox1:first-child .LuxeMegaDropdown-ContentInner {
+    border-bottom-left-radius: 3px;
+  }
+  @media (max-width: 1024px) {
+    .MegaDropdown-ContentInner {
+        width: 128px;
+        padding: 12px 6px;
+    }
+  }
+  .bgWhite {
+    background-color: #fff;
+  }
+  
