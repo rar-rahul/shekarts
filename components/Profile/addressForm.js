@@ -27,6 +27,7 @@ export default function NewCustomer() {
     <form onSubmit={handleInfo}>
       <div className="mb-3">
         <label className="mb-3">{t("add_address")}</label>
+        <div className="col-md-6">
         <div className="mb-3">
           <input
             type="text"
@@ -36,7 +37,7 @@ export default function NewCustomer() {
             className="form-control"
           />
         </div>
-        <div className="row">
+      </div>
           <div className="col-md-6">
             <div className="mb-3">
               <input
@@ -59,7 +60,7 @@ export default function NewCustomer() {
               />
             </div>
           </div>
-        </div>
+        <div className="col-md-6">
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -69,7 +70,8 @@ export default function NewCustomer() {
             rows="2"
           />
         </div>
-        <div className="row">
+        </div>
+       
           <div className="col-md-6">
             <div className="mb-3">
               <input
@@ -82,17 +84,8 @@ export default function NewCustomer() {
             </div>
           </div>
           <div className="col-md-6">
-            <div className="mb-3">
-              <input
-                type="text"
-                placeholder={`${t("state_province")}*`}
-                name="state"
-                required
-                className="form-control"
-              />
-            </div>
-          </div>
-          <div className="col-md-6">
+           
+          
             <div className="mb-3">
               <input
                 type="text"
@@ -102,8 +95,19 @@ export default function NewCustomer() {
                 className="form-control"
               />
             </div>
-          </div>
-          <div className="col-md-6">
+
+            <div className="mb-3">
+              <input
+                type="text"
+                placeholder={`${t("state_province")}*`}
+                name="state"
+                required
+                className="form-control"
+              />
+            </div>
+        
+        
+          {/* <div className="col-md-6">
             <div className="mb-3">
               <select className="form-control" required name="country">
                 <option value="" disabled>
@@ -116,8 +120,8 @@ export default function NewCustomer() {
                 ))}
               </select>
             </div>
-          </div>
-          <div className="col-md-6">
+          </div> */}
+          {/* <div className="col-md-6">
             <div className="mb-3">
               <input
                 type="text"
@@ -125,11 +129,10 @@ export default function NewCustomer() {
                   "Save As? For example: Home Address, Office Address, etc.."
                 )}*`}
                 className="form-control"
-                required
                 name="addressTitle"
               />
             </div>
-          </div>
+          </div> */}
           <div className="col-md-6">
             <div className="card p-2 mb-3">
               <div className="form-check">

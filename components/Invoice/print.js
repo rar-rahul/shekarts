@@ -16,8 +16,8 @@ const InvoicePrint = ({ data }) => {
         {settings.settingsData.logo[0] && (
           <ImageLoader
             src={settings.settingsData.logo[0]?.url}
-            width={166}
-            height={60}
+            width={80}
+            height={80}
             alt={settings.settingsData.name}
             quality={100}
           />
@@ -36,7 +36,7 @@ const InvoicePrint = ({ data }) => {
         <h5>Delivery details</h5>
         <div className="row">
           <div className="col-6">
-            <h6>Delivery for</h6>
+            <h6>Bill To</h6>
             <p>Name : {data?.shippingInfo?.fullName || ""}</p>
             <p>Email : {data?.shippingInfo?.email || ""}</p>
             <p>Phone no : {data?.shippingInfo?.phone || ""}</p>
@@ -63,7 +63,7 @@ const InvoicePrint = ({ data }) => {
           <table className="table">
             <thead className="cart_item_header">
               <tr>
-                <th>Product</th>
+                <th>Item Name</th>
                 <th className="text-end">Total</th>
               </tr>
             </thead>
@@ -72,14 +72,7 @@ const InvoicePrint = ({ data }) => {
                 <tr className="cart_item" key={index}>
                   <td>
                     <div className="cart_container">
-                      <span className="cart_image">
-                        <ImageLoader
-                          src={item.image[0]?.url}
-                          height={50}
-                          width={50}
-                          alt={item.name}
-                        />
-                      </span>
+                    
                       <span className="cart_disc">
                         <b>{item.name}</b>
                         {item.color.name && (
@@ -93,7 +86,7 @@ const InvoicePrint = ({ data }) => {
                     </div>
                   </td>
                   <td>
-                    {currencySymbol}
+                    {currencySymbol}.
                     {decimalBalance(item.price)}
                   </td>
                 </tr>
@@ -103,39 +96,39 @@ const InvoicePrint = ({ data }) => {
         </div>
         <div className="confirmation_pay">
           <div>
-            <span>Sub Total</span>
+            <span>Amount</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {decimalBalance(data.totalPrice)}
             </span>
           </div>
           <div>
             <span>Discount</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {decimalBalance(
                 checkPercentage(data.totalPrice, data.coupon?.discount || 0)
               )}
             </span>
           </div>
           <div>
-            <span>Delivery Charge</span>
+            <span>Shipping Charges</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {data.deliveryInfo.cost}
             </span>
           </div>
-          <div>
+          {/* <div>
             <span>Vat</span>
             <span>
               {currencySymbol}
               {decimalBalance(data.vat)}
             </span>
-          </div>
+          </div> */}
           <div>
-            <span>Tax</span>
+            <span>GST</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {decimalBalance(data.tax)}
             </span>
           </div>

@@ -11,6 +11,7 @@ import GlobalModal from "~/components/Ui/Modal/modal";
 import { checkPercentage, fetchData, postData } from "~/lib/clientFunctions";
 import { applyCoupon, resetCart, updateBillingData } from "~/redux/cart.slice";
 import SignIn from "~/components/Auth/signin";
+import SignUp from "~/components/Auth/signup";
 
 const CheckoutNav = dynamic(() => import("~/components/Checkout/checkoutNav"));
 const PaymentGatewayList = dynamic(() =>
@@ -62,7 +63,6 @@ const Checkout = () => {
       console.log("res",response)
       if (response.success) {
         setShippingChargeInfo(response.shippingCharge);
-        
       } else {
         toast.error("something went wrong");
       }
@@ -126,12 +126,6 @@ const Checkout = () => {
     setDeliveryLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
-  console.log("testRes",shippingChargeInfo);
-  console.log("testDelievery",deliveryInfo);
-
- 
 
   const sameShippingAddress = (e) => {
     const isChecked = e.target.checked;
@@ -299,10 +293,88 @@ const Checkout = () => {
         id: null,
       },
     };
+
+  const curiorData = { 
+    "data": {
+       "shipments": [
+            {
+                "waybill": "",
+                "order": "11105874456",
+                "sub_order": "BA",
+                "order_date": "08-08-2024",
+                "total_amount": "299",
+                "name": "Raut P",
+                "company_name": "",
+                "add": "JP Main Road",
+                "add2": "",
+                "add3": "",
+                "pin": "440034",
+                "city": "",
+                "state": "",
+                "country": "IN",
+                "phone": "8007656192",
+                "alt_phone": "",
+                "email": "rahulraut430@gmail.com",
+                "is_billing_same_as_shipping": "Yes",
+                "billing_name": "",
+                "billing_company_name": "",
+                "billing_add": "",
+                "billing_add2": "",
+                "billing_add3": "",
+                "billing_pin": "",
+                "billing_city": "",
+                "billing_state": "",
+                "billing_country": "",
+                "billing_phone": "",
+                "billing_alt_phone": "",
+                "billing_email": "",
+                "products":[
+                    {
+                        "product_name": "Jezara Pure Vitamin-C Face Wash | 100% Oil Free Skin",
+                        "product_sku": "SKU003",
+                        "product_quantity": "1",
+                        "product_price": "199",
+                        "product_tax_rate": "35.82",
+                        "product_hsn_code": "HSN500",
+                        "product_discount": "30"
+                    }
+                ],
+                "shipment_length": "10",
+                "shipment_width": "10",
+                "shipment_height": "10",
+                "weight": "0.24",
+                "shipping_charges": "0",
+                "giftwrap_charges": "",
+                "transaction_charges": "",
+                "total_discount": "00",
+                "first_attemp_discount": "",
+                "cod_charges": "",
+                "advance_amount": "",
+                "cod_amount": "0",
+                "payment_mode": "Prepaid",
+                "reseller_name": "",
+                "eway_bill_number": "",
+                "gst_number": "",
+                "return_address_id": "1293",
+                "api_source" : "1",
+                "store_id" :"",
+            }
+         ], 
+      "pickup_address_id" :"1293",
+      "access_token" :"5a7b40197cd919337501dd6e9a3aad9a", 
+      "secret_key" : "2b54c373427be180d1899400eeb21aab", 
+      "logistics" : "Delhivery",  
+      "s_type" : "", 
+      "order_type" : "" 
+     }
+    }
     const url = `/api/order/new`;
+    const curiUrl = `https://pre-alpha.ithinklogistics.com/api_v3/order/add.json`;
     const formData = new FormData();
     formData.append("checkoutData", JSON.stringify(data));
     const response = await postData(url, formData);
+    const delresponse = await postData(curiUrl, curiorData);
+    console.log(delresponse);
     response && response.success
       ? (dispatch(resetCart()),
         toast.success("Order successfully placed"),
@@ -393,7 +465,7 @@ const Checkout = () => {
       </GlobalModal>
       {showLoginModal && (
         <div className={classes.overlay}>
-          <SignIn
+          <SignUp
             popup
             hidePopup={() => {
               setShowLoginModal(false);
@@ -464,8 +536,8 @@ const Checkout = () => {
                     </div>
                   </td>
                   <td>
-                    {currencySymbol}
-                    {decimalBalance(item.price)}
+                  
+                  ₹{decimalBalance(item.price)}
                   </td>
                 </tr>
               ))}
@@ -475,20 +547,13 @@ const Checkout = () => {
             <tbody>
               <tr>
                 <td colSpan="2"></td>
-                <td className="text-end">{t("sub_total")}:</td>
+                <td className="text-end">{t("Total MRP")}:</td>
                 <td className="text-end">
-                  {currencySymbol}
-                  {decimalBalance(getTotalPrice)}
+                  
+                  ₹{decimalBalance(getTotalPrice)}
                 </td>
               </tr>
-              <tr>
-                <td colSpan="2"></td>
-                {/* <td className="text-end">{t("tax")}:</td>
-                <td className="text-end">
-                  {currencySymbol}
-                  {decimalBalance(getTotalTax)}
-                </td> */}
-              </tr>
+             
               <tr>
                 <td colSpan="2"></td>
                 {/* <td className="text-end">{t("vat")}:</td>
@@ -501,23 +566,31 @@ const Checkout = () => {
                 <td colSpan="2"></td>
                 <td className="text-end">{t("discount")}:</td>
                 <td className="text-end">
-                  {currencySymbol}
+                  {currencySymbol}.
                   {decimalBalance(discountPrice)}
                 </td>
               </tr>
               <tr>
                 <td colSpan="2"></td>
-                <td className="text-end">{t("delivery_charge")}:</td>
+                <td className="text-end">{t("Shipping Charge")}:</td>
                 <td className="text-end">
-                  {currencySymbol}
+                  {currencySymbol}.
                   {decimalBalance(deliveryInfo.cost || 0)}
+                </td>
+              </tr>
+              <tr>
+                <td colSpan="2"></td>
+                <td className="text-end">{t("tax")}:</td>
+                <td className="text-end">
+                  {currencySymbol}.
+                  {decimalBalance(getTotalTax)}
                 </td>
               </tr>
               <tr>
                 <td colSpan="2"></td>
                 <td className="text-end fw-bold">{t("total")}:</td>
                 <td className="text-end fw-bold">
-                  {currencySymbol}
+                  {currencySymbol}.
                   {decimalBalance(finalPrice)}
                 </td>
               </tr>

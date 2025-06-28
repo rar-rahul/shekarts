@@ -8,6 +8,7 @@ import { postData, stockInfo } from "~/lib/clientFunctions";
 import { updateComparelist, updateWishlist } from "~/redux/cart.slice";
 import c from "./product.module.css";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 const Product = ({
   product,
@@ -112,12 +113,12 @@ const Product = ({
         <div>
           <Link href={`/product/${product.slug}`}>
             <div className={c.container}>
-              <ImageLoader
+              <Image
                 src={product.image[0]?.url}
                 alt={product.name}
                 width={200}
-                height={200}
-                style={{ width: "100%", height: "auto" }}
+                height={255}
+                style={{ width: "100%", height: "255px", objectFit: "cover"}}
                 quality={100}
               />
             </div>
@@ -139,8 +140,8 @@ const Product = ({
             <div className={c.price_con}>
               {product.discount < product.price && (
                 <p className={c.price}>
-                  {settings.settingsData.currency.symbol}. 
-                   {product.discount}
+                 
+                  ₹{product.discount}
                 </p>
               )}
               <p
@@ -148,8 +149,8 @@ const Product = ({
                   product.discount < product.price ? c.price_ori : c.price
                 }
               >
-                {settings.settingsData.currency.symbol}. 
-                {product.price}
+                
+                ₹{product.price}
                 
               </p>
             </div>

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import ReviewCount from "~/components/Review/count";
 import classes from "~/components/Shop/Product/productDetails.module.css";
 import { _simpleProductCart, _variableProductCart } from "~/lib/cartHandle";
-import { postData, setSettingsData, stockInfo } from "~/lib/clientFunctions";
+import { postData, setSettingsData, stockInfo, fetchData } from "~/lib/clientFunctions";
 import productDetailsData from "~/lib/dataLoader/productDetails";
 import { wrapper } from "~/redux/store";
 
@@ -41,9 +41,13 @@ function ProductDetailsPage({ data, error }) {
   const [price, setPrice] = useState(0);
   const [tabId, setTabId] = useState(2);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [shippingChargeInfo, setShippingChargeInfo] = useState({});
+  const [showPinAvailable, setShowPinAvailable] = useState(false);
+  const [showAvailable, setShowAvailable] = useState(false);
   const dispatch = useDispatch();
   const quantityAmount = useRef();
   const question = useRef();
+  const deliveryArea = useRef();
   const cartData = useSelector((state) => state.cart);
   const settings = useSelector((state) => state.settings);
   const router = useRouter();
@@ -56,6 +60,26 @@ function ProductDetailsPage({ data, error }) {
   const discountInPercent =
   Math.round((100 - (data.product.discount * 100) / data.product.price) * 10) / 10;
   //console.log(discountInPercent);
+  async function fetchShippingCharge() {
+    try {
+      const response = await fetchData(`/api/home/shipping`);
+      console.log("res",response)
+      if (response.success) {
+        setShippingChargeInfo(response.shippingCharge);
+        
+      } else {
+        toast.error("something went wrong");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() =>{
+    fetchShippingCharge();
+    console.log("test",shippingChargeInfo);
+  },[])
+
   useEffect(() => {
     if (data && data.product) {
       setPrice(data.product.discount);
@@ -77,6 +101,8 @@ function ProductDetailsPage({ data, error }) {
       }
     }
   }, [data]);
+
+  console.log(selectedImage)
 
   const checkVariantInfo = (color, attr) => {
     const colorName = color || selectedColor.name;
@@ -221,8 +247,32 @@ function ProductDetailsPage({ data, error }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedColor, selectedAttribute]);
 
+
+  const setDeliveryArea = () => {
+    const area = deliveryArea.current.value;
+    const areaInfo = shippingChargeInfo.area.filter((item) =>
+      area.includes(item.pincode)
+    );
+
+    if(areaInfo.length == 0 && area.length == 6){
+      setShowPinAvailable(true);
+      setShowAvailable(false);
+    }
+    if(areaInfo.length == 1 ){
+      setShowPinAvailable(false);
+      setShowAvailable(true);
+    }
+    if(area.length < 6 ){
+      setShowPinAvailable(false);
+      setShowAvailable(false);
+    }
+  
+  };
+
   if (error) return <Error500 />;
   if (!data.product) return <Error404 />;
+
+  console.log(data.product)
 
   return (
     <>
@@ -274,12 +324,15 @@ function ProductDetailsPage({ data, error }) {
                       {data.product.shortDescription}
                     </p>
                     <hr />
-                    <div>
-                     
-                      <p className={classes.price}>
-                        {settings.settingsData.currency.symbol}
+                    {/* <div>
+                       <span>{settings.settingsData.currency.symbol}.</span> 
+                        <p className={classes.price}>
                         {price}
                       </p> 
+                       <span className={classes.price_off}>
+                       ({discountInPercent}% OFF)
+                      </span>
+                      
                       {data.product.discount < data.product.price && (
                         <>
                         <span className={classes.price_mrp}>MRP.</span>
@@ -287,13 +340,33 @@ function ProductDetailsPage({ data, error }) {
                        {settings.settingsData.currency.symbol}
                           {data.product.price} 
                         </p>
+
                         </>
                       )}
-                       <span className={classes.price_off}>
-                       ({discountInPercent}% OFF)
-                      </span>
-                    </div>
+                      
+                    </div> */}
                    
+                    <div className={classes.css2ildi4}>
+                      <div className="mb-2">
+                        <span className={`${classes.amountClass}`} data-at="sp-pdp">
+                          <span className={classes.cssa5kl1t}>₹</span>{price}</span>
+                          <span className={classes.cssrnaqop} data-at="price-offer">{discountInPercent}% Off</span>
+                          </div>
+                          <div className={`${classes.cssrde8tt} mb-3`}>
+                            <span className={classes.cssk7qhhy}>MRP</span>
+                            {data.product.discount < data.product.price && (
+                              <>
+                            <span className={classes.originalAmountClass} data-at="mrp-pdp">
+                            
+                              
+                              <span className={classes.cssa5kl1t}>₹</span><span className={classes.css5pw8k6}>{data.product.price} </span>
+                              </span>
+                              <span className={classes.sub}>Inclusive of all taxes</span>
+                              </>
+                            )}
+                              </div>
+                              </div>
+                            
                     {data.product.type === "variable" && (
                       <div>
                         {data.product.colors.length > 0 && (
@@ -399,6 +472,78 @@ function ProductDetailsPage({ data, error }) {
                       </div>
                     </div>
                     <hr/>
+                    <div id="mweb-delivery-details" className="css-1b2x0kn">
+  <div className={classes.cssswwxch}>Select Delivery Location</div>
+  <div className={classes.css2vj9xo}>
+    <div className={classes.css1ago99h}>
+      <p className={classes.csse7e7hp}>Enter the pincode of your area to check product availability and delivery options</p>
+      <form>
+        <section className={classes.inputContainer}>
+          <div className={classes.css12cxopj}>
+            <div className={classes.css1kfrrig}>
+             
+             
+      <input
+        type="text"
+        className={classes.searchInput_def}
+        placeholder={t("Enter Pincode")}
+        maxLength={6}
+        onKeyUp={setDeliveryArea}
+        ref={deliveryArea}
+      />
+      
+             
+              {/* <div className={classes.css1e46tsl}>
+                <button 
+                  type="button" 
+                  tabIndex="0" 
+                  aria-label="close" 
+                  disabled="" 
+                  className="css-1gdrk6j"
+                >Apply</button>
+              </div> */}
+            </div>
+            <span className={classes.csspus4nj}> </span>
+          </div>
+        </section>
+      </form>
+             {showPinAvailable &&(
+                 <span className="text-danger ml-1"> Delivery Not Availbale!</span>
+                )}
+                {showAvailable &&(
+                 <span className="text-success"> Delivery Availbale!</span>
+                )}
+    </div>
+  </div>
+  <div data-at="ecom-strip" className={classes.css18wazaq}>
+    <div className={classes.cssnnct6p}>
+      <img 
+        src="https://images-static.nykaa.com/nykdesignstudio-images/pub/media/wysiwyg/COD.png" 
+        alt="Cash on delivery" 
+        className={classes.css1d6fa51}
+      />
+      <h3 className={classes.css1qfl0qu}>COD <b>available</b></h3>
+    </div>
+    <div className={classes.cssnnct6p}>
+      <img 
+        src="https://images-static.nykaa.com/nykdesignstudio-images/pub/media/wysiwyg/Return.png" 
+        alt="Return and exchange" 
+        className={classes.css1d6fa51}
+      />
+      <h3 className={classes.css1qfl0qu}>7-day return &amp;<br/>size exchange</h3>
+    </div>
+    <div className={classes.cssnnct6p}>
+      <img 
+        src="https://images-static.nykaa.com/nykdesignstudio-images/pub/media/wysiwyg/Free_Delivery.png" 
+        alt="Delivery details" 
+        className={classes.css1d6fa51}
+      />
+      <h3 className={classes.css1qfl0qu}><b></b> Usually ships in  <b>2 days</b></h3>
+    </div>
+  </div>
+  <div className={classes.cssvn3r4t}></div>
+  <div className=" css-0"></div>
+</div>
                     <div>
                     {data.product.description &&
                   data.product.description.length > 0 ? (

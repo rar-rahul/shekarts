@@ -75,17 +75,17 @@
 }
 
 .price {
-  font-size: 22px;
+  font-size: 20px;
   color: var(--secondary);
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 25px;
   display: inline-block;
   margin-right: 5px;
 }
 
 .price_ori {
-  font-size: 19px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 200;
   margin-bottom: 25px;
   color: var(--light_black);
   text-decoration: line-through;
@@ -454,4 +454,298 @@
   .tab_button button {
     line-height: 20px;
   }
+}
+
+.css2ildi4.container {
+  -webkit-box-pack: center;
+  justify-content: center;
+  margin-top: 0px;
+  padding-right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 42px;
+}
+.css2ildi4 .amountClass {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+}
+.cssa5kl1t {
+  margin-right: 1px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+.css2ildi4 .discountPercentage {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.1px;
+}
+.cssrnaqop {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #068743;
+  position: relative;
+  vertical-align: baseline;
+}
+.cssrde8tt {
+  height: 17px;
+  color: rgba(0, 19, 37, 0.64);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  margin-top: 0.125rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+.css2ildi4 .mrplabel {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+}
+.cssk7qhhy {
+  margin-right: 0.25rem;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 16px;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+}
+.css2ildi4 .originalAmountClass {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  margin-right: 0.25rem;
+}
+.css5pw8k6 {
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+}
+.cssrde8tt .sub {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 16px;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  vertical-align: top;
+}
+
+/**********Delevery location**************/
+.cssswwxch {
+  height: 24px;
+  width: 100%;
+  margin-bottom: 0px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+  color: rgb(25, 40, 55);
+  margin-top: 0px;
+}
+
+.css2vj9xo {
+  width: 100%;
+  max-width: 360px;
+}
+.css1ago99h {
+  width: 100%;
+}
+.csse7e7hp {
+  margin: 0.25rem 0 0.75rem 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  color: #192837;
+}
+.css12cxopj {
+  background: #f3f4f5;
+  border-radius: 2px;
+  position: relative;
+  height: 48px;
+  border-bottom: 1px solid rgba(0, 19, 37, 0.16);
+}
+.css1kfrrig {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-right: 0;
+  max-width: 100%;
+}
+.csskw5zsc {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  max-width: 100%;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  padding: 0;
+  margin: 0 0 0 0.75rem;
+}
+.css5af4cx {
+  color: rgba(0, 19, 37, 0.64);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  position: absolute;
+  pointer-events: none;
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  text-transform: capitalize;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transform: scale(1) translate3d(0, -50%, 0);
+  -ms-transform: scale(1) translate3d(0, -50%, 0);
+  transform: scale(1) translate3d(0, -50%, 0);
+  left: 0;
+  top: 50%;
+}
+.css1e46tsl {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+.css1gdrk6j[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: rgba(0, 19, 37, 0.16);
+}
+.css1gdrk6j {
+  border: none;
+  outline: none;
+  color: #fd7685;
+  background: none;
+  cursor: pointer;
+  padding: 0 0.75rem;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  -webkit-letter-spacing: 0.1px;
+  -moz-letter-spacing: 0.1px;
+  -ms-letter-spacing: 0.1px;
+  letter-spacing: 0.1px;
+}
+.csspus4nj {
+  position: absolute;
+  bottom: -3px;
+  display: block;
+  width: 100%;
+}
+.csspus4nj:after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 100%;
+  bottom: 1px;
+  position: absolute;
+  background: #fd7685;
+  -webkit-transition: 0.3s ease -webkit-transform;
+  -webkit-transition: 0.3s ease transform;
+  transition: 0.3s ease transform;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: top center;
+  -ms-transform-origin: top center;
+  transform-origin: top center;
+}
+.css18wazaq {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  
+}
+.cssnnct6p {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 18%;
+  cursor: pointer;
+}
+.css1d6fa51 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  width: 50px;
+  height: 50px;
+}
+.css1qfl0qu {
+  text-align: center;
+  color: rgb(25, 40, 55);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  margin: 0px;
+}
+.cssvn3r4t {
+  width: calc(100% + 32px);
+  height: 1px;
+  background: rgba(0, 19, 37, 0.16);
+  margin: 1rem 0px 1rem -1rem;
+}
+
+.searchBar_def {
+  width: 100%;
+  position: relative;
+}
+.searchInput_def {
+  background-color: #75727214;
+  border: none !important;
+  color: #000;
+  font-size: 14px;
+  height: 42px;
+  padding: 12px 23px;
+  width: 100%;
+  
 }
