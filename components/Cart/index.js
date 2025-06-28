@@ -114,7 +114,11 @@ const CartPage = () => {
   }
   return (
     <div className={classes.container}>
+
       <h1>{t("your_cart")}</h1>
+      <div class="container">
+  <div class="row">
+  <div class="col-md-8">
       <div className={classes.header}>
         <p>{t("image")}</p>
         <p>{t("name")}</p>
@@ -153,27 +157,29 @@ const CartPage = () => {
             </button>
           </div>
           <div data-name="Total Price">
-            {settings.settingsData.currency.symbol}
+            {settings.settingsData.currency.symbol}.
             {decimalBalance(item.qty * item.price)}
           </div>
         </div>
       ))}
+      </div>
+      <div class="col-md-4">
       <div className={classes.card_container}>
         <div className={classes.card}>
           <p>{t("delivery")}</p>
-          <b>{settings.settingsData.currency.symbol}0</b>
+          <b>{settings.settingsData.currency.symbol}.0</b>
         </div>
         <div className={classes.card}>
           <p>{t("sub_total")}</p>
           <b>
-            {settings.settingsData.currency.symbol}
+            {settings.settingsData.currency.symbol}.
             {decimalBalance(getTotalPrice)}
           </b>
         </div>
         <div className={classes.card}>
           <p>{t("discount")}</p>
           <b>
-            {settings.settingsData.currency.symbol}
+            {settings.settingsData.currency.symbol}.
             {decimalBalance(discountPrice)}
           </b>
         </div>
@@ -181,7 +187,7 @@ const CartPage = () => {
           <div className={classes.card}>
             <p>{t("vat")}</p>
             <b>
-              {settings.settingsData.currency.symbol}
+              {settings.settingsData.currency.symbol}.
               {decimalBalance(getTotalVat)}
             </b>
           </div>
@@ -190,7 +196,7 @@ const CartPage = () => {
           <div className={classes.card}>
             <p>{t("tax")}</p>
             <b>
-              {settings.settingsData.currency.symbol}
+              {settings.settingsData.currency.symbol}.
               {decimalBalance(getTotalTax)}
             </b>
           </div>
@@ -198,10 +204,13 @@ const CartPage = () => {
         <div className={classes.card}>
           <p>{t("total")}</p>
           <b>
-            {settings.settingsData.currency.symbol}
+            {settings.settingsData.currency.symbol}.
             {decimalBalance(finalPrice)}
           </b>
         </div>
+      </div>
+      </div>
+      </div>
       </div>
       <div className={classes.checkout_container}>
         <div className={classes.coupon}>
@@ -219,6 +228,7 @@ const CartPage = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

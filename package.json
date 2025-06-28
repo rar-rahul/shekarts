@@ -11,9 +11,11 @@
     "start_dev": "cross-env NODE_ENV=production NEXT_PUBLIC_APP_SSL=no node server.js",
     "seed": "node seeder/index.mjs",
     "s3tolocal": "node codemod/s3ToLocal.mjs",
-    "analyze": "cross-env ANALYZE=true npm run build"
+    "analyze": "cross-env ANALYZE=true npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
-  "author": "rar",
+  "author": "Rahul Raut",
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.303.0",
@@ -70,7 +72,11 @@
     "xss": "^1.0.14"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
     "eslint": "^8.36.0",
-    "eslint-config-next": "^13.2.4"
+    "eslint-config-next": "^13.2.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }

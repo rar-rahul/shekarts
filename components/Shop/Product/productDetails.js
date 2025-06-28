@@ -221,11 +221,10 @@ const ProductDetails = (props) => {
             <h1 className={classes.heading}>{data.product.name}</h1>
             <hr />
             <div>
-             
-              <p className={classes.price}>
-                {settings.settingsData.currency.symbol}
+               <span> {settings.settingsData.currency.symbol}.</span>
+                <div className={classes.price}>
                 {price}
-              </p>
+              </div> 
               {data.product.discount < data.product.price && (
                 <p className={classes.price_ori}>
                   MRP.{settings.settingsData.currency.symbol}

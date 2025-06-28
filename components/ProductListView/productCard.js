@@ -71,13 +71,12 @@ function ProductCard(props) {
               : classes.price_a
           }
         >
-          {settings.settingsData.currency.symbol}
-          {props.data.price}
+          
+          ₹{props.data.price}
         </p>
         {props.data.discount < props.data.price && (
           <p className={classes.price_a}>
-            {settings.settingsData.currency.symbol}
-            {props.data.discount}
+            ₹{props.data.discount}
           </p>
         )}
       </>

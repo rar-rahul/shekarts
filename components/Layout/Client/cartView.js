@@ -92,8 +92,8 @@ export default function CartView() {
                     <div className={c.content}>
                       <p>{item.name} </p>
                       <b>
-                        {`${
-                          settings.settingsData.currency.symbol + item.price
+                      ₹{`${
+                           + item.price
                         } (X${item.qty})`}
                       </b>
                       {item.color.name && <span>Color: {item.color.name}</span>}
@@ -108,14 +108,14 @@ export default function CartView() {
                 ))}
               </ul>
               <div className={c.total}>
-                <span>{t("total_incl_vat_tax")}</span>
+                <span>{t("Inclusive All Taxes")}</span>
                 <span>
-                  {settings.settingsData.currency.symbol}
-                  {getTotalPrice()}
+                 
+                  ₹{getTotalPrice()}
                 </span>
               </div>
               <div className={c.btn_container}>
-                <Link href="/cart">{t("view_cart")}</Link>
+                {/* <Link href="/cart">{t("view_cart")}</Link> */}
                 <button onClick={gotoCheckout}>{t("checkout")}</button>
               </div>
             </>

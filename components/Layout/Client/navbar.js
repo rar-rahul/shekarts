@@ -112,27 +112,6 @@ const NavBar = () => {
       <nav
         className={`${c.nav}`}
       >
-        {/* <div className={c.top_bar}>
-         
-            <div className={c.top_bar_left}>
-              <div
-                className={`${c.top_bar_content} ${c.top_bar_content_p_left}`}
-              >
-                <GeoAlt width={15} height={15} />
-                {std.shortAddress}
-              </div>
-              <div
-                className={`${c.top_bar_content} ${c.top_bar_content_p_left}`}
-              >
-                <Telephone width={15} height={15} />
-                {std.phoneHeader}
-              </div>
-            </div>
-            <div className={c.top_bar_right}>
-             
-            </div>
-         
-        </div> */}
        <div id={c.offerbanner} className={c.css37632m}>
        <div id={c.offerbanner} className={c.topstripbg}>
         <div className={c.top_strip_wrapper}>

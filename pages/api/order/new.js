@@ -113,9 +113,9 @@ export default async function apiHandler(req, res) {
           Math.round(
             (price + vat + tax + (deliveryInfo.cost || 0) - discount) * 10
           ) / 10;
-        const orderId = `R${customId({ randomLength: 4, upperCase: true })}`;
+        const orderId = `SKRT2024${customId({ randomLength: 2, upperCase: true })}`;
         const paymentStatus =
-          paymentData.method === "Cash On Delivery" ? "Unpaid" : "Paid";
+          paymentData.method === "COD" ? "Unpaid" : "Paid";
         const orderData = {
           orderId,
           products,

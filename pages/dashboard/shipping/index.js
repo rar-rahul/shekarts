@@ -168,7 +168,7 @@ const ShippingCharges = () => {
           {permissions.delete && (
             <div
               className={classes.button}
-              onClick={() => openModal(row._id, row.name, row.price, "delete")}
+              onClick={() => openModal(row._id, row.name,row.pincode,row.price, "delete")}
             >
               <Trash width={22} height={22} title="DELETE" />
             </div>

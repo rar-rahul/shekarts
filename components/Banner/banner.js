@@ -11,6 +11,7 @@ const Banner = (props) => {
     <div className={`${classes.content_container} custom_container`}>
       <div className="col-12">
         <div className={classes.banner}>
+        <Link href={props.banner.url} className={classes.button}>
           <div className={classes.bg}>
             <Image
               src={props.banner.image[0]?.url}
@@ -21,13 +22,14 @@ const Banner = (props) => {
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
+          </Link>
           <div className={classes.content}>
             <h2 className={classes.heading}>{props.banner.title}</h2>
             <h4 className={classes.subheading}>{props.banner.subTitle}</h4>
             <p className={classes.body}>{props.banner.description}</p>
-            <Link href={props.banner.url} className={classes.button}>
+            {/* <Link href={props.banner.url} className={classes.button}>
               {t("shop_now")}
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

@@ -95,7 +95,7 @@
   justify-content: space-between;
   padding: 10px;
   border-top: 1px solid var(--border_color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .total span:last-child {
