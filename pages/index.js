@@ -30,6 +30,7 @@ function HomePage({ data, error }) {
     setIsOpen(false);
   };
 
+
   useEffect(() => {
     if (router.query.slug) {
       setIsOpen(false);

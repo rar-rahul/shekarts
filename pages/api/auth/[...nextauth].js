@@ -7,7 +7,10 @@ import GoogleProvider from "next-auth/providers/google";
 import userModel from "~/models/user";
 import clientPromise from "~/utils/mongoDriver";
 
+console.log("NEXTAUTH_SECRET:", process.env.NEXTAUTH_SECRET);
+
 export default NextAuth({
+  
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
@@ -25,7 +28,7 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log(credentials);
+        
         // const { username, password } = credentials;
         const { phone } = credentials;
        
@@ -43,13 +46,13 @@ export default NextAuth({
       },
     }),
   ],
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
     maxAge: 3 * 60 * 60, // 3hr
   },
   jwt: {
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET || "mynameisrarandiamverygooddeveloper",
     maxAge: 3 * 60 * 60, // 3hr
   },
   callbacks: {

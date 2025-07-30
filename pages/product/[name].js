@@ -102,7 +102,7 @@ function ProductDetailsPage({ data, error }) {
     }
   }, [data]);
 
-  console.log(selectedImage)
+
 
   const checkVariantInfo = (color, attr) => {
     const colorName = color || selectedColor.name;

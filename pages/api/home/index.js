@@ -6,6 +6,7 @@ import BrandModel from "~/models/brand";
 import dbConnect from "~/utils/dbConnect";
 
 export default async function apiHandler(req, res) {
+   console.log("Secret:", process.env.NEXTAUTH_SECRET);
   const { method } = req;
 
   await dbConnect();

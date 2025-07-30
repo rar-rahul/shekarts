@@ -61,9 +61,7 @@ export default function SignUp() {
 
     const res = await fetch(`https://2factor.in/API/V1/99835995-7d26-11ed-9158-0200cd936042/SMS/:+91${userMobile}/AUTOGEN/SHEKARTSOTP`)
     const data = await res.json();
-    console.log(data);
     if(data.Status == "Success"){
-      console.log("success");
       toast.success("OTP Send Successfully");
       router.push({
         pathname: '/verifyotp',

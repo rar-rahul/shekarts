@@ -25,7 +25,7 @@ const breakpointNewArrival = {
 
 function BrandsList(items) {
   const { t } = useTranslation();
-  console.log(items)
+  
 
   // if (!items || !items.length) {
   //   return null;

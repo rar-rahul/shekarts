@@ -41,10 +41,10 @@ export default function Verifyotp() {
         data.append("email", `${phone}@gmail.com`);
 
         const isUserExist = await postData(`/api/auth/checkuser`, data);
-        console.log(isUserExist)
+      
 
         if(isUserExist.success == true){
-          console.log("ready");
+          
           const res = await signIn("credentials", {
             redirect: false,
             phone,

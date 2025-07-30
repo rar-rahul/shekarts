@@ -11,7 +11,7 @@ export default async function apiHandler(req, res) {
     case "GET":
       try {
         const { category } = req.query;
-        console.log(category)
+       
        
         const product = await ProductModel.find({ slug: category });
        

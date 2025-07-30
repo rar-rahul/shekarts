@@ -43,7 +43,7 @@ const Product = ({
     return text;
   };
 
-  console.log(product);
+  
 
   const addToWishList = async () => {
     try {
