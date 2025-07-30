@@ -17,7 +17,7 @@ export default async function apiHandler(req, res) {
     case "POST":
       try {
         const data = await parseForm(req);
-        console.log(data);
+       
         const { phone } = data.field;
         const users = await userModel
           .findOne({ phone: phone })

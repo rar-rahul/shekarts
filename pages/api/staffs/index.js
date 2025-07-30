@@ -15,7 +15,7 @@ const fields = [
 
 export default async function apiHandler(req, res) {
   const { method } = req;
-  const secret = process.env.AUTH_SECRET;
+  const secret = process.env.NEXTAUTH_SECRET;
   const session = await getToken({ req, secret });
   if (!session || !session.user.a)
     return res

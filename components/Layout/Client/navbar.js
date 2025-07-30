@@ -215,7 +215,7 @@ const NavBar = () => {
           <div className={c.nav_link}>
           <div className="dropdown">
          
-          {cat.map((item, idx) => (
+          {cat?.map((item, idx) => (
             <>
              <Link
                     href={`/gallery?category=${item.slug}`}
