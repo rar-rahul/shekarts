@@ -3,14 +3,15 @@
   flex-direction: column;
   position: fixed;
   z-index: 998;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #ffffff98;
+  background-color: #ffffff; /* solid white */
   box-shadow: 0px 10px 15px #0000000d;
-  backdrop-filter: blur(10px);
+  backdrop-filter: none; /* remove blur if not needed */
   transition: transform 0.3s;
 }
+
 
 .nav hr {
   margin: 0;

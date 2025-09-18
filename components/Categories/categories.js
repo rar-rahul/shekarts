@@ -13,9 +13,9 @@ function Category(props) {
               <Image
                 src={props.img}
                 alt={props.name}
-                width={140}
-                height={140}
-                style={{objectFit: "cover",borderRadius: "50%",position: "absolute",top:"0",left:"0",padding:"10px"}}
+              
+                fill
+                style={{objectFit: "cover",borderRadius: "50%",position: "absolute",top:"0",left:"0",padding:"0px"}}
               />
              
             </div>

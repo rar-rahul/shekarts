@@ -109,7 +109,7 @@ const NavBar = () => {
   return (
     <>
       <nav className={`${c.nav}`}>
-        <div id={c.offerbanner} className={c.css37632m}>
+        {/* <div id={c.offerbanner} className={c.css37632m}>
           <div id={c.offerbanner} className={c.topstripbg}>
             <div className={c.top_strip_wrapper}>
               <div className={`${c.leftDiv} ts-wrap-l`}>
@@ -181,7 +181,7 @@ const NavBar = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className={c.container}>
           <div className={c.start}>
