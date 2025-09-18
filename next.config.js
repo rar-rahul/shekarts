@@ -9,6 +9,7 @@ const next_config = {
         hostname: "**",
       },
     ],
+    domains: ["shekarts.com"],
   },
   i18n: {
     defaultLocale: "en",

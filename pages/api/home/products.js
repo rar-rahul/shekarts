@@ -25,7 +25,8 @@ export default async function apiHandler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const { type } = req.query;
+        const { type, page, limit=8 } = req.query;
+        const skip = (page - 1) * limit;
         const arg =
           type === "trending"
             ? { trending: true }
@@ -34,8 +35,12 @@ export default async function apiHandler(req, res) {
             : type === "bestselling"
             ? { bestSelling: true }
             : {};
+
+        
         if (arg) {
-          const data = await ProductModel.find(arg).select(pif).limit(30);
+          const data = await ProductModel.find(arg).select(pif).skip(skip)
+          .limit(Number(limit))
+          .lean();
           res.setHeader(
             "Cache-Control",
             "s-maxage=300, stale-while-revalidate"
