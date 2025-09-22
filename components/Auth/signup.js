@@ -44,8 +44,8 @@ export default function SignUp() {
           ? (toast.success("New account added successfully"),
             document.querySelector("#signup_form").reset())
           : !response.success && response.duplicate
-          ? toast.error("User with the given email is already exists")
-          : toast.error("Something went Wrong");
+            ? toast.error("User with the given email is already exists")
+            : toast.error("Something went Wrong");
       } else {
         toast.error("Both Password Field Value Not Matched");
         passwordConfirm.current.focus();
@@ -55,22 +55,28 @@ export default function SignUp() {
     }
   };
 
-  const handleGetOtp = async () => { 
-
+  const handleGetOtp = async () => {
     let userMobile = mobile.current.value;
 
-    const res = await fetch(`https://2factor.in/API/V1/99835995-7d26-11ed-9158-0200cd936042/SMS/:+91${userMobile}/AUTOGEN/SHEKARTSOTP`)
+    const res = await fetch("/api/auth/sendotp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({phone: userMobile }),
+    });
     const data = await res.json();
-    if(data.Status == "Success"){
+
+   
+
+    if (data.Status == "Success") {
       toast.success("OTP Send Successfully");
       router.push({
-        pathname: '/verifyotp',
-        query: { otpverifydetails:data.Details, phone:userMobile },
+        pathname: "/verifyotp",
+        query: { otpverifydetails: data.Details, phone: userMobile },
       });
-    }else{
+    } else {
       console.log("errro");
-    }      
-  }
+    }
+  };
 
   return (
     <>
@@ -122,12 +128,8 @@ export default function SignUp() {
           </div>
           <div className={classes.form_container}>
             <h1>{t("LogIn")}</h1>
-            <form
-              
-              id="signup_form"
-              className={classes.form}
-            >
-               <input
+            <form id="signup_form" className={classes.form}>
+              <input
                 type="text"
                 ref={mobile}
                 required
@@ -168,7 +170,9 @@ export default function SignUp() {
                   {t("already_have_an_account?_sign_in")}
                 </Link> */}
               </div>
-              <button type="button" onClick={handleGetOtp}>{t("Get OTP")}</button>
+              <button type="button" onClick={handleGetOtp}>
+                {t("Get OTP")}
+              </button>
             </form>
             {(facebook || google) && <span className={classes.hr} />}
             <div>

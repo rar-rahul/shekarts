@@ -43,14 +43,11 @@
 }
 
 .container {
-  overflow: hidden;
-  background-color: var(--white);
-  height: 255px;
+  position: relative;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2px;
+  height: 300px; /* adjust card size */
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 .container img {

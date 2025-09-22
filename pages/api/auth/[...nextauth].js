@@ -10,7 +10,6 @@ import clientPromise from "~/utils/mongoDriver";
 console.log("NEXTAUTH_SECRET:", process.env.NEXTAUTH_SECRET);
 
 export default NextAuth({
-  
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
@@ -28,20 +27,27 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        
-        // const { username, password } = credentials;
+        const { username, password } = credentials;
         const { phone } = credentials;
-       
-        const userData = await userModel.findOne({ phone: phone });
-      
-        if (userData) {
-          // const validPassword = await bcrypt.compare(password, userData.hash);
-          // if (validPassword) {
-          //   return userData;
-          // }
-          // return null;
+        let userData = null;
+
+        if (username && password) {
+          userData = await userModel.findOne({ email: username });
+          if (!userData) return null;
+
+          const validPassword = await bcrypt.compare(password, userData.hash);
+          if (!validPassword) return null;
+
           return userData;
         }
+
+        if (phone) {
+    userData = await userModel.findOne({ phone: phone });
+    if (!userData) return null;
+
+    // ⚡ no password check here
+    return userData;
+  }
         return null;
       },
     }),
@@ -52,7 +58,7 @@ export default NextAuth({
     maxAge: 3 * 60 * 60, // 3hr
   },
   jwt: {
-    secret: process.env.NEXTAUTH_SECRET || "mynameisrarandiamverygooddeveloper",
+    secret: process.env.NEXTAUTH_SECRET,
     maxAge: 3 * 60 * 60, // 3hr
   },
   callbacks: {

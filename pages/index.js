@@ -49,6 +49,7 @@ function HomePage({ data, error }) {
             carousel={data.additional && data.additional.homePage.carousel}
           />
           <CategoryList categoryList={data.category} />
+          
           <ProductList title={t("new_products")} type="new" />
           <div className="content_spacing" />
           <Banner banner={data.additional && data.additional.homePage.banner} />
@@ -58,7 +59,7 @@ function HomePage({ data, error }) {
             data={data.additional && data.additional.homePage.collection}
           />
           <ProductList title={t("best_selling")} type="bestselling" />
-          <BrandCardList items={data.brand || []} />
+          
           <div className="content_spacing" />
         </>
       )}

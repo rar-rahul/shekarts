@@ -113,14 +113,13 @@ const Product = ({
         <div>
           <Link href={`/product/${product.slug}`}>
             <div className={c.container}>
-              <Image
+                <Image
                 src={product.image[0]?.url}
                 alt={product.name}
-                width={200}
-                height={255}
-                style={{ width: "100%", height: "255px", objectFit: "cover"}}
+                fill
+                style={{ objectFit: "cover" }}
                 quality={100}
-              />
+                />
             </div>
           </Link>
           {product.discount < product.price && (

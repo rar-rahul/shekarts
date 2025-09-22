@@ -31,8 +31,15 @@ export default function Verifyotp() {
   const handleForm = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`https://2factor.in/API/V1/99835995-7d26-11ed-9158-0200cd936042/SMS/VERIFY/${otpverifydetails}/${mobile.current.value}`)
-      const responceData = await res.json();
+      // const res = await fetch(`https://2factor.in/API/V1/99835995-7d26-11ed-9158-0200cd936042/SMS/VERIFY/${otpverifydetails}/${mobile.current.value}`)
+      // const responceData = await res.json();
+
+       const res = await fetch("/api/auth/verifyotp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({phone: mobile.current.value, detail: otpverifydetails}),
+    });
+    const responceData = await res.json();
 
       if(responceData.Status === "Success"){
 

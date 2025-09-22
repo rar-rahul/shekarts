@@ -3,13 +3,11 @@ import { NextResponse } from "next/server";
 export default async function apiHandler(req, res)  {
     if (req.method === "POST") {
     try {
-      const { phone } = req.body;
-
-      console.log(phone)
+      const { phone,detail } = req.body;
 
       const apiKey = process.env.TWO_FACTOR_API_KEY;
       const otpRes = await fetch(
-        `https://2factor.in/API/V1/${apiKey}/SMS/+91${phone}/AUTOGEN/SHEKARTSOTP`
+        `https://2factor.in/API/V1/99835995-7d26-11ed-9158-0200cd936042/SMS/VERIFY/${detail}/${phone}`
       );
       const data = await otpRes.json();
 
