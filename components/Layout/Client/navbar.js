@@ -78,34 +78,6 @@ const NavBar = () => {
     }
   };
 
-  const navItem = [
-    {
-      id: 1,
-      name: t("home"),
-      to: "/",
-    },
-    {
-      id: 2,
-      name: t("shop"),
-      to: "/gallery",
-    },
-    {
-      id: 3,
-      name: t("all_categories"),
-      to: "/categories",
-    },
-    {
-      id: 4,
-      name: t("faq"),
-      to: "/faq",
-    },
-    {
-      id: 5,
-      name: t("about"),
-      to: "/about",
-    },
-  ];
-
   return (
     <>
       <nav className={`${c.nav}`}>

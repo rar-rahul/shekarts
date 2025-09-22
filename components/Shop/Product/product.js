@@ -114,19 +114,20 @@ const Product = ({
           <Link href={`/product/${product.slug}`}>
             <div className={c.container}>
                 <Image
-                src={product.image[0]?.url}
-                alt={product.name}
-                fill
-                style={{ objectFit: "cover" }}
-                quality={100}
-                />
+  src={product.image[0]?.url}
+    alt={product.name}
+    fill
+    style={{ objectFit: "cover" }}
+    sizes="(max-width: 768px) 100vw, 33vw"
+  />
+                
             </div>
           </Link>
           {product.discount < product.price && (
             <div className={c.discount}>-{discountInPercent}%</div>
           )}
           <div className={c.nameContainer}>
-            <ReviewCount reviews={product.review || []} showCount />
+            {/* <ReviewCount reviews={product.review || []} showCount /> */}
             <div className={c.name}>
               <Link href={`/product/${product.slug}`}>{product.name}</Link>
             </div>

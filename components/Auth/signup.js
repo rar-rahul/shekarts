@@ -65,8 +65,6 @@ export default function SignUp() {
     });
     const data = await res.json();
 
-   
-
     if (data.Status == "Success") {
       toast.success("OTP Send Successfully");
       router.push({

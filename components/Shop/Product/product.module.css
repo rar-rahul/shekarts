@@ -9,7 +9,7 @@
 }
 
 .item {
-  padding: 15px;
+  padding: 1px;
   animation: fade_in 0.8s;
   max-width: 266px;
   direction: ltr;
@@ -25,7 +25,8 @@
   background-color: var(--white);
   position: relative;
   overflow: hidden;
-  padding: 0 15px;
+  padding: 0 0px;
+  width: 275px;
   
 }
 
@@ -45,9 +46,11 @@
 .container {
   position: relative;
   width: 100%;
-  height: 300px; /* adjust card size */
-  overflow: hidden;
+  aspect-ratio: 1 / 1;   /* Square cards */
+  /* OR aspect-ratio: 4 / 5; for taller look */
   border-radius: 12px;
+  overflow: hidden;   
+      /* important: avoid flex shrinking */
 }
 
 .container img {

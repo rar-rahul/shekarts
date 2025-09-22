@@ -17,6 +17,7 @@ const ClientLayout = (props) => {
     if (dimension.width !== 0 && dimension.width <= 991) {
       return setMobileNav(true);
     }
+     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

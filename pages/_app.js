@@ -15,6 +15,7 @@ import { Inter } from 'next/font/google'
 import { appWithI18Next } from "ni18n";
 import { ni18nConfig } from "../ni18n.config";
 
+
 const roboto = Roboto({
   weight: ["400", "500", "700"],
   style: ["normal", "italic"],
