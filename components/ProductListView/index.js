@@ -23,10 +23,10 @@ const breakpointNewArrival = {
     slidesPerView: 4,
   },
   1100: {
-    slidesPerView: 5,
+    slidesPerView: 4,
   },
   1600: {
-    slidesPerView: 6,
+    slidesPerView: 4,
   },
 };
 
@@ -52,34 +52,6 @@ function ProductList(props) {
   const hasMore = products.length === 8 ? 1 : 0; // to check if more data available
 
   if (error) toast.error("Something went wrong");
-
-  console.log("useswr",data);
-
-  // async function loadData() {
-  //   try {
-  //     const url = `/api/home/products?type=${props.type}&page=${page}&limit=8`;
-  //     const resp = await fetchData(url);
-  //     resp.success
-  //       ? setProductList(resp.products || [])
-  //       : toast.error("Something Went Wrong");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error("Something Went Wrong");
-  //   }
-  //   setLoaded(true);
-  // }
-
-  // async function loadData() {
-  //   try {
-  //     data.success
-  //       ? setProductList(data.products || [])
-  //       : toast.error("Something Went Wrong");
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error("Something Went Wrong");
-  //   }
-  //   setLoaded(true);
-  // }
 
   // useEffect(() => {
   //   if (onViewPort && !loaded) {
