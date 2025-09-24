@@ -37,6 +37,14 @@ const inter = Inter({
   display: 'swap',
 })
 
+import { Lexend_Zetta } from "next/font/google";
+
+const lexendZetta = Lexend_Zetta({
+  subsets: ["latin"],
+  weight: ["400", "700"], // choose weights you need
+  variable: "--font-lexendZetta"
+});
+
 import { Cinzel } from "next/font/google";
 
 const cinzel = Cinzel({
@@ -47,7 +55,7 @@ const cinzel = Cinzel({
 import { Raleway } from "next/font/google";
 
 const montserrat = Raleway({
-  weight: ["300","400"],  // you pick what weights you need
+  weight: ["500","600"],  // you pick what weights you need
   subsets: ["latin"],
   variable: "--font-heading",
 });
@@ -78,9 +86,10 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>{`
         html,
         body {
-          font-family: ${cinzel.style.fontFamily};
+          font-family: ${montserrat.style.fontFamily};
         }
       `}</style>
+      <div className={`${cinzel.variable} ${lexendZetta.variable}`}>
       <ThirdPartyScript />
       <NextNProgress color="var(--primary)" options={{ showSpinner: false }} />
       <Appearance />
@@ -108,6 +117,7 @@ function MyApp({ Component, pageProps }) {
         theme="colored"
         transition={Flip}
       />
+      </div>
     </SessionProvider>
   );
 }
