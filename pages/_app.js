@@ -37,6 +37,13 @@ const inter = Inter({
   display: 'swap',
 })
 
+import { Cinzel } from "next/font/google";
+
+const cinzel = Cinzel({
+  subsets: ["latin"],   // required
+  weight: ["400", "700"], // choose weights you need
+});
+
 import { Raleway } from "next/font/google";
 
 const montserrat = Raleway({
@@ -71,7 +78,7 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>{`
         html,
         body {
-          font-family: ${montserrat.style.fontFamily};
+          font-family: ${cinzel.style.fontFamily};
         }
       `}</style>
       <ThirdPartyScript />
