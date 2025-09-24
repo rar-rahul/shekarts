@@ -12,14 +12,26 @@ const ClientLayout = (props) => {
   const footerVisibility =
     typeof props.footer == "undefined" ? true : props.footer;
   const [mobileNav, setMobileNav] = useState(false);
+  const [isClient, setIsClient] = useState(false); 
   const dimension = useWindowDimensions();
+
   useEffect(() => {
-    if (dimension.width !== 0 && dimension.width <= 991) {
-      return setMobileNav(true);
-    }
-     
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      setMobileNav(dimension.width <= 991);
+    }
+  }, [dimension.width, isClient]);
+
+  // // useEffect(() => {
+  // //   if (dimension.width !== 0 && dimension.width <= 991) {
+  // //     return setMobileNav(true);
+  // //   }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   return (
     <>
       {mobileNav ? <MobileNav /> : <NavBar />}

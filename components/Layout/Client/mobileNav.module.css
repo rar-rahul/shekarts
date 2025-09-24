@@ -3,18 +3,19 @@
   flex-direction: column;
   position: fixed;
   z-index: 999;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100vw;
-  background-color: #ffffff98;
+  background-color: #ffffff; /* fully opaque white */
   box-shadow: 0px 10px 15px #0000000d;
-  backdrop-filter: blur(10px);
+  /* remove blur */
+  backdrop-filter: none;
   transition: transform 0.3s;
-  padding: 10px;
+  padding: 10px 0 10px 5px;
   max-height: 76px;
   overflow: hidden;
-  padding-left: 5px;
 }
+
 
 .start {
   display: flex;
@@ -67,4 +68,11 @@
   margin-left: 10px;
   color: var(--primary);
   cursor: pointer;
+}
+
+/* layout.module.css */
+.logoWrapper {
+  max-width: 250px; /* desktop max width */
+  width: 100%;      /* scales down on mobile */
+  height: auto;
 }

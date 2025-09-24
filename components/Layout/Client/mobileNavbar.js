@@ -38,14 +38,13 @@ export default function MobileNav() {
           <div className={c.brand}>
             <Link href="/">
               {settings.settingsData.logo[0] && (
-                <ImageLoader
-                  src={settings.settingsData.logo[0]?.url}
-                  width={250}
-                  height={70}
-                  quality={100}
-                  alt={settings.settingsData.name}
-                  style={{ width: "100%", height: "auto" }}
-                />
+               <div className={c.logoWrapper}>
+        <ImageLoader
+          src={settings.settingsData.logo[0]?.url}
+          alt={settings.settingsData.name}
+          style={{ width: "100%", height: "auto" }}
+        />
+      </div>
               )}
             </Link>
           </div>
