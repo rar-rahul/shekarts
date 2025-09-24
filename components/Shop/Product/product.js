@@ -34,7 +34,7 @@ const Product = ({
     const __data = wishlistState ? wishlistState + 1 : 1;
     dispatch(updateWishlist(__data));
   }
-  const maxLength = 45;
+  const maxLength = 80;
 
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {

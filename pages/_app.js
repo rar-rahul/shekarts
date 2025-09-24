@@ -15,6 +15,14 @@ import { Inter } from 'next/font/google'
 import { appWithI18Next } from "ni18n";
 import { ni18nConfig } from "../ni18n.config";
 
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({
+  weight: ["400"],  // Great Vibes usually has one weight
+  subsets: ["latin"],  // or others as needed
+  variable: "--font-great-vibes",
+});
+
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -28,6 +36,14 @@ const inter = Inter({
   style: 'normal',
   display: 'swap',
 })
+
+import { Raleway } from "next/font/google";
+
+const montserrat = Raleway({
+  weight: ["300","400"],  // you pick what weights you need
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
 
 const NextNProgress = dynamic(() => import("nextjs-progressbar"), {
   ssr: false,
@@ -55,7 +71,7 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>{`
         html,
         body {
-          font-family: ${inter.style.fontFamily};
+          font-family: ${montserrat.style.fontFamily};
         }
       `}</style>
       <ThirdPartyScript />
