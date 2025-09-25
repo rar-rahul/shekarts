@@ -149,6 +149,7 @@ input[type="number"] {
   width: 95%;
   max-width: 1400px;
   margin: auto;
+  height: 800px;
 }
 
 .content_container {
