@@ -254,7 +254,8 @@ const Footer = (props) => {
           </div>
         </footer>
       </>
-    );
+    ); 
+
 
   return null;
 };
