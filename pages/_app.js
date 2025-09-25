@@ -16,11 +16,20 @@ import { appWithI18Next } from "ni18n";
 import { ni18nConfig } from "../ni18n.config";
 
 import { Great_Vibes } from "next/font/google";
+import { Libre_Baskerville } from "next/font/google";
 
 const greatVibes = Great_Vibes({
   weight: ["400"],  // Great Vibes usually has one weight
   subsets: ["latin"],  // or others as needed
   variable: "--font-great-vibes",
+});
+
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"], // Regular + Bold
+  style: ["normal", "italic"],
+  variable: "--font-libre-baskerville", // 👈 CSS variable
+  display: "swap",
 });
 
 
@@ -31,10 +40,19 @@ const roboto = Roboto({
   display: "swap",
 });
 
+import { Roboto_Mono } from "next/font/google";
+
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // pick what you need
+  variable: "--font-roboto-mono", // optional for CSS variables
+});
+
 const inter = Inter({
   subsets: ['latin'],
   style: 'normal',
   display: 'swap',
+  variable: '--font-inter',
 })
 
 import { Lexend_Zetta } from "next/font/google";
@@ -50,6 +68,7 @@ import { Cinzel } from "next/font/google";
 const cinzel = Cinzel({
   subsets: ["latin"],   // required
   weight: ["400", "700"], // choose weights you need
+  variable: "--font-cinzel"
 });
 
 import { Raleway } from "next/font/google";
@@ -58,6 +77,14 @@ const montserrat = Raleway({
   weight: ["500","600"],  // you pick what weights you need
   subsets: ["latin"],
   variable: "--font-heading",
+});
+
+import { Overpass } from "next/font/google";
+const overpass = Overpass({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // choose what you need
+  variable: "--font-overpass", // 👈 gives CSS variable
+  display: "swap",
 });
 
 const NextNProgress = dynamic(() => import("nextjs-progressbar"), {
@@ -86,10 +113,10 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>{`
         html,
         body {
-          font-family: ${montserrat.style.fontFamily};
+          font-family: ${overpass.style.fontFamily};
         }
       `}</style>
-      <div className={`${cinzel.variable} ${lexendZetta.variable}`}>
+      <div className={`${cinzel.variable} ${libreBaskerville.variable}`}>
       <ThirdPartyScript />
       <NextNProgress color="var(--primary)" options={{ showSpinner: false }} />
       <Appearance />

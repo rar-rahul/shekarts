@@ -158,11 +158,11 @@ input[type="number"] {
 .content_heading {
   font-size:24px;
   padding: 20px 0px 20px;
-  font-family: var(--font-lexendZetta), serif !important;
+  font-family: var(--font-libre-baskerville), serif;
   font-weight: 500; /* Dark color for readability */
   text-transform: capitalize;
   text-align: center; /* Centered text for a balanced look */
-  color: #fc2779;
+  color: #252324;
   
 }
 
