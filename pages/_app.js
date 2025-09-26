@@ -113,7 +113,7 @@ function MyApp({ Component, pageProps }) {
       <style jsx global>{`
         html,
         body {
-          font-family: ${robotoMono.style.fontFamily};
+          font-family: ${overpass.style.fontFamily};
         }
       `}</style>
       <div className={`${cinzel.variable} ${libreBaskerville.variable}`}>
