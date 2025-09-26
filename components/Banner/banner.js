@@ -19,7 +19,7 @@ const Banner = (props) => {
               fill={true}
               quality={100}
               priority={true}
-              style={{objectFit: "contain" }}
+              style={{objectFit: "cover" }}
             />
           </div>
           </Link>
