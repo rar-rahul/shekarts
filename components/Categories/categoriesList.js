@@ -1,4 +1,5 @@
-import { A11y, Autoplay } from "swiper";
+import { A11y, Autoplay,Navigation } from "swiper";
+import { CaretLeft, CaretRight } from "@styled-icons/bootstrap";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Category from "./categories";
@@ -38,7 +39,7 @@ function CategoryList(props) {
         <h2 className={`content_heading`}>{t("Shop By Category")}</h2>
         <div className={c.root_container}>
           <Swiper
-            modules={[A11y, Autoplay]}
+            modules={[Navigation,A11y, Autoplay]}
             spaceBetween={0}
             slidesPerView="auto"
             breakpoints={breakpointNewArrival}

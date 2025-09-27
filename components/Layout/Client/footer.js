@@ -41,10 +41,7 @@ const Footer = (props) => {
       },
     ],
     shop: [
-      {
-        name: t("faq"),
-        link: "/faq",
-      },
+      
       {
         name: t("privacy_policy"),
         link: "/privacy",
@@ -137,28 +134,28 @@ const Footer = (props) => {
               <div className="col-md-3 px-3 py-2">
                 <h3 className={classes.footer_heading}>{t("contact_info")}</h3>
                 <div className={classes.address}>
-                  <div>
-                    <label>{t("address")}:</label>
-                    <p>{settings.settingsData.address}</p>
-                  </div>
-                  <div>
-                    <label>{t("email")}:</label>
-                    <a
-                      className={classes.address_content}
-                      href={`mailto:${settings.settingsData.email}`}
-                    >
-                      {settings.settingsData.email}
-                    </a>
-                  </div>
-                  <div>
-                    <label>{t("phone")}:</label>
-                    <a
-                      className={classes.address_content}
-                      href={`tel:${settings.settingsData.phoneFooter}`}
-                    >
-                      {settings.settingsData.phoneFooter}
-                    </a>
-                  </div>
+                  <div className="d-flex py-2">
+      <label className="me-2">{t("address")}:</label>
+      <p className="mb-0">{settings.settingsData.address}</p>
+    </div>
+                  <div className="d-flex py-2">
+      <label className="me-2">{t("email")}:</label>
+      <a
+        className={`${classes.address_content} mb-0`}
+        href={`mailto:${settings.settingsData.email}`}
+      >
+        {settings.settingsData.email}
+      </a>
+    </div>
+                   <div className="d-flex py-2">
+      <label className="me-2">{t("phone")}:</label>
+      <a
+        className={`${classes.address_content} mb-0`}
+        href={`tel:${settings.settingsData.phoneFooter}`}
+      >
+        {settings.settingsData.phoneFooter}
+      </a>
+    </div>
                 </div>
               </div>
               <div className="col-md-3 px-3 py-2">
