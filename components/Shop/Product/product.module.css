@@ -50,7 +50,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;   /* Square cards */
   /* OR aspect-ratio: 4 / 5; for taller look */
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   overflow: hidden;   
 
       /* important: avoid flex shrinking */

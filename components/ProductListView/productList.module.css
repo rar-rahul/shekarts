@@ -17,7 +17,7 @@
 
 .container > div > div:hover {
   border: 0px solid var(--primary) !important;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px !important;
+  /* box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px !important; */
 }
 
 .container img {
