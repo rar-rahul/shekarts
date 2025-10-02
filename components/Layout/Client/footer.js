@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 
 import "react-toastify/dist/ReactToastify.css";
 import classes from "./footer.module.css";
+import { FaFacebook, FaYoutube, FaInstagram } from "react-icons/fa";
 import {
   Headset,
   ShieldCheck,
@@ -15,6 +16,9 @@ import {
   Pinterest,
   Twitter,
   Youtube,
+  Envelope,
+  GeoAlt ,
+  Phone 
 } from "@styled-icons/bootstrap";
 import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
@@ -135,20 +139,21 @@ const Footer = (props) => {
                 <h3 className={classes.footer_heading}>{t("contact_info")}</h3>
                 <div className={classes.address}>
                   <div className="d-flex py-2">
-      <label className="me-2">{t("address")}:</label>
+      <label className="me-2"><GeoAlt width={18} height={18} /></label>
       <p className="mb-0">{settings.settingsData.address}</p>
     </div>
                   <div className="d-flex py-2">
-      <label className="me-2">{t("email")}:</label>
+      <label className="me-2"><Envelope width={18} height={18} /></label>
       <a
         className={`${classes.address_content} mb-0`}
         href={`mailto:${settings.settingsData.email}`}
       >
+         
         {settings.settingsData.email}
       </a>
     </div>
                    <div className="d-flex py-2">
-      <label className="me-2">{t("phone")}:</label>
+      <label className="me-2"><Phone width={18} height={18} /></label>
       <a
         className={`${classes.address_content} mb-0`}
         href={`tel:${settings.settingsData.phoneFooter}`}
@@ -215,14 +220,14 @@ const Footer = (props) => {
                     className={classes.social_icon}
                     aria-label="Facebook"
                   >
-                    <Facebook width={24} height={24} />
+                    <FaFacebook size={32} color="#1877F2" />
                   </a>
                   <a
                     href={settings.settingsData.social.instagram}
                     className={classes.social_icon}
                     aria-label="Instagram"
                   >
-                    <Instagram width={24} height={24} />
+                   <FaInstagram size={32} color="#E4405F" />
                   </a>
                   <a
                     href={settings.settingsData.social.twitter}
@@ -236,7 +241,7 @@ const Footer = (props) => {
                     className={classes.social_icon}
                     aria-label="Youtube"
                   >
-                    <Youtube width={24} height={24} />
+                  <FaYoutube size={32} color="#FF0000" />
                   </a>
                   <a
                     href={settings.settingsData.social.pinterest}

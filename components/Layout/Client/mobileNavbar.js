@@ -42,7 +42,7 @@ export default function MobileNav() {
         <ImageLoader
           src={settings.settingsData.logo[0]?.url}
           alt={settings.settingsData.name}
-          style={{ width: "100%", height: "auto" }}
+          style={{ width: "70px", height: "70px" }}
         />
       </div>
               )}

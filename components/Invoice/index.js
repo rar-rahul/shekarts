@@ -1,159 +1,161 @@
-import React from "react";
+"use client";
+
+import { QRCodeCanvas } from "qrcode.react";
 import { useSelector } from "react-redux";
 import customId from "custom-id-new";
-import classes from "~/components/Checkout/checkout.module.css";
-import styles from './Invoice.module.css';
 import { checkPercentage, decimalBalance } from "~/lib/clientFunctions";
-import ImageLoader from "../Image";
-import { useTranslation } from "react-i18next";
 
-const Invoice = ({ data }) => {
+export default function Invoice({ data }) {
   const settings = useSelector((state) => state.settings);
   const currencySymbol = settings.settingsData.currency.symbol;
-  const { t } = useTranslation();
   const invoiceId = `WGTL202407${customId({ randomLength: 1, upperCase: true })}`;
-  const isoString = data.orderDate;
-const date = new Date(isoString);
-const year = date.getFullYear();
-const month = date.getMonth() + 1; // +1 because getMonth() returns 0-11
-const day = date.getDate();
-const address = data.billingInfo.house;
-const addressParts = address.split(" ");
-const part1 = addressParts.slice(0, 5).join(" ");
-const part2 = addressParts.slice(5).join(" ");
-console.log(data)
+
+  // Format Date
+  const date = new Date(data.orderDate);
+  const formattedDate = date.toLocaleDateString("en-IN");
 
   return (
-    <div className={styles.invoiceBox}>
-    <table cellPadding="0" cellSpacing="0">
-        <tr className={styles.top}>
-            <td colSpan="4">
-                <table>
-                    <tr>
-                        <td className={styles.title}>
-                        {settings.settingsData.logo[0] && (
-          <ImageLoader
-            src={settings.settingsData.logo[0]?.url}
-            width={75}
-            height={75}
-            alt={settings.settingsData.name}
-            quality={100}
-          />
-        )}                        </td>
-        
-                        <td>
-                        <span className={styles.heading2}>WINTEL GLOBAL TECHNOLOGY
-                        PVT LTD</span> <br />
-                           <span className={styles.address}>16/1 Shakkar Bazar, Cloth Market Indore</span> <br />
-                           <span className={styles.address}>GSTIN:23AADCW7267K1ZX</span><br />
-                           <span className={styles.address}>State: 23-Madhya Pradesh</span> 
-                       
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        {/* <h3 className={styles.headTax}>Tax Invoice</h3> */}
-        <tr className={styles.heading}>
-       <td colSpan={4} className={styles.headTax}>
-           Tax Invoice
-       </td>
-   </tr>
-        <tr className={styles.information}>
-            
-            <td colSpan={4}>
-                <table>
-                    <tr>
-                        <td>
-                        <span className={styles.heading2}>Bill To</span><br />
-                        <span className={styles.heading}>{data.billingInfo.fullName}</span><br />
-                      <span className={styles.address}>{part1}</span> <br />
-                      <span className={styles.address}>{part2}</span> <br />
-                      <span className={styles.address}>{data.billingInfo.city},{data.billingInfo.zipCode}</span> <br />
-                      <span className={styles.address}>{data.billingInfo.state}</span> <br />
-                      <span className={styles.address}>{data.billingInfo.phone}</span> <br />
-                        </td>
-                     
-                     
-                        <td>
-                        <span className={styles.heading2}>Invoice Details</span><br />
-                        <span className={styles.heading}>Invoice No:</span> #<span className={styles.address}>{invoiceId}</span><br />
-                        <span className={styles.heading}>Order Id:</span> #<span className={styles.address}>{data.orderId}</span><br/>
-                        <span className={styles.heading}>Order Date:</span> {`${day}-${month}-${year}`}<br />
-                        <span className={styles.heading}>Payment Method:</span> <span className={styles.address}>{data.paymentMethod}</span> <br />
+    <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200 p-6 text-sm">
+      {/* Header */}
+      <div className="flex justify-between items-center border-b pb-4 mb-4">
+        <div className="flex items-center gap-3">
+          {settings.settingsData.logo[0] && (
+            <img
+              src={settings.settingsData.logo[0]?.url}
+              alt={settings.settingsData.name}
+              className="w-16 h-16 object-contain"
+            />
+          )}
+          <div>
+            <h2 className="text-lg font-bold">{settings.settingsData.name}</h2>
+            <p className="text-gray-600 text-xs">16/1 Shakkar Bazar, Cloth Market Indore</p>
+            <p className="text-gray-600 text-xs">GSTIN: 23AADCW7267K1ZX</p>
+            <p className="text-gray-600 text-xs">State: 23-Madhya Pradesh</p>
+          </div>
+        </div>
+        <QRCodeCanvas value={invoiceId} size={80} />
+      </div>
 
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-       
-        <tr className={styles.heading}>
-       
-            <td>
-                Item Name
-            </td>
-            <td>Quantity</td>
-            <td align="end">Unit</td>
-            
-            <td colSpan={2} align="end">
-                Price
-            </td>
-        </tr>
-        {data.products.map((item, index) => (
-        <tr className={styles.item} key={index}>
-        
-            <td>
-            {item.name}<br/>
-            {item.color.name && <span className={styles.heading}>Color: {item.color.name}</span>} <br/> 
-                  {item.attribute.name && (
-                    <span className={styles.heading}>{`${item.attribute.for}: ${item.attribute.name}`}</span>
+      {/* Invoice Title */}
+      <h3 className="text-center text-lg font-semibold border-b pb-2 mb-4">Tax Invoice</h3>
+
+      {/* Invoice Info */}
+      <div className="grid grid-cols-2 gap-6 mb-6">
+        {/* Billing Info */}
+        <div>
+          <h4 className="font-semibold text-gray-700 mb-2">Bill To</h4>
+          <p>{data.billingInfo.fullName}</p>
+          <p>{data.billingInfo.house}</p>
+          <p>
+            {data.billingInfo.city}, {data.billingInfo.zipCode}
+          </p>
+          <p>{data.billingInfo.state}</p>
+          <p>{data.billingInfo.phone}</p>
+        </div>
+
+        {/* Invoice Details */}
+        <div>
+          <h4 className="font-semibold text-gray-700 mb-2">Invoice Details</h4>
+          <p>
+            <span className="font-medium">Invoice No:</span> #{invoiceId}
+          </p>
+          <p>
+            <span className="font-medium">Order Id:</span> #{data.orderId}
+          </p>
+          <p>
+            <span className="font-medium">Order Date:</span> {formattedDate}
+          </p>
+          <p>
+            <span className="font-medium">Payment Method:</span> {data.paymentMethod}
+          </p>
+        </div>
+      </div>
+
+      {/* Products Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full border border-gray-200 text-sm">
+          <thead className="bg-gray-100 border-b">
+            <tr>
+              <th className="text-left py-2 px-3">Item</th>
+              <th className="text-center py-2 px-3">Qty</th>
+              <th className="text-center py-2 px-3">Unit</th>
+              <th className="text-right py-2 px-3">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.products.map((item, index) => (
+              <tr key={index} className="border-b">
+                <td className="py-2 px-3">
+                  <span className="font-medium">{item.name}</span>
+                  {item.color?.name && (
+                    <p className="text-xs text-gray-600">Color: {item.color.name}</p>
                   )}
-            </td>
-            <td>{item.qty}</td>
-            <td align="end">Nos</td>
-           
-            <td colSpan={2} align="end">
-            ₹{item.price}
-            </td>
-        </tr>
-      ))}
-       
-       <tr className={styles.total}>
-            <td colSpan={3}></td>
-            <td>
-                Amount: ₹{decimalBalance(data.totalPrice)}
-            </td>
-        </tr>
-       <tr className={styles.total}>
-            <td colSpan={3}></td>
-            <td>
-                Discount: ₹{decimalBalance(
-                checkPercentage(data.totalPrice, data.coupon?.discount || 0)
-              )}
-            </td>
-        </tr>
-       <tr className={styles.total}>
-            <td colSpan={3}></td>
-            <td>
-                Shipping Charges: ₹{data.deliveryInfo.cost}
-            </td>
-        </tr>
-        <tr className={styles.total}>
-            <td colSpan={3}></td>
-            <td>
-                GST: ₹{decimalBalance(data.tax)}
-            </td>
-        </tr>
-        <tr className={styles.total}>
-            <td colSpan={3}></td>
-            <td>
-                Total Amount: ₹{decimalBalance(data.payAmount)}
-            </td>
-        </tr>
-    </table>
-</div>
-  );
-};
+                  {item.attribute?.name && (
+                    <p className="text-xs text-gray-600">
+                      {item.attribute.for}: {item.attribute.name}
+                    </p>
+                  )}
+                </td>
+                <td className="text-center py-2 px-3">{item.qty}</td>
+                <td className="text-center py-2 px-3">Nos</td>
+                <td className="text-right py-2 px-3">
+                  {currencySymbol}
+                  {decimalBalance(item.price)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-export default Invoice;
+      {/* Totals */}
+      <div className="mt-6 flex justify-end">
+        <div className="w-64 space-y-1 text-sm">
+          <div className="flex justify-between">
+            <span>Amount:</span>
+            <span>
+              {currencySymbol}
+              {decimalBalance(data.totalPrice)}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span>Discount:</span>
+            <span>
+              {currencySymbol}
+              {decimalBalance(checkPercentage(data.totalPrice, data.coupon?.discount || 0))}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span>Shipping:</span>
+            <span>
+              {currencySymbol}
+              {decimalBalance(data.deliveryInfo.cost)}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span>GST:</span>
+            <span>
+              {currencySymbol}
+              {decimalBalance(data.tax)}
+            </span>
+          </div>
+          <div className="flex justify-between font-semibold border-t pt-2">
+            <span>Total:</span>
+            <span>
+              {currencySymbol}
+              {decimalBalance(data.payAmount)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-8 text-center text-xs text-gray-500 border-t pt-3">
+        Thank you for shopping with {settings.settingsData.name}.  
+        <br />
+        This is a computer-generated invoice.
+      </div>
+    </div>
+  );
+}
+ 
