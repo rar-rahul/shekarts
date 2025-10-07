@@ -114,4 +114,5 @@ const Invoice = ({ data }) => {
   );
 };
 
-export default Invoice;
+export default Invoice; 
+
