@@ -1,161 +1,117 @@
-"use client";
-
-import { QRCodeCanvas } from "qrcode.react";
+import React from "react";
 import { useSelector } from "react-redux";
-import customId from "custom-id-new";
+import classes from "~/components/Checkout/checkout.module.css";
 import { checkPercentage, decimalBalance } from "~/lib/clientFunctions";
+import ImageLoader from "../Image";
+import { useTranslation } from "react-i18next";
 
-export default function Invoice({ data }) {
+const Invoice = ({ data }) => {
   const settings = useSelector((state) => state.settings);
   const currencySymbol = settings.settingsData.currency.symbol;
-  const invoiceId = `WGTL202407${customId({ randomLength: 1, upperCase: true })}`;
-
-  // Format Date
-  const date = new Date(data.orderDate);
-  const formattedDate = date.toLocaleDateString("en-IN");
-
+  const { t } = useTranslation();
   return (
-    <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200 p-6 text-sm">
-      {/* Header */}
-      <div className="flex justify-between items-center border-b pb-4 mb-4">
-        <div className="flex items-center gap-3">
-          {settings.settingsData.logo[0] && (
-            <img
-              src={settings.settingsData.logo[0]?.url}
-              alt={settings.settingsData.name}
-              className="w-16 h-16 object-contain"
-            />
-          )}
-          <div>
-            <h2 className="text-lg font-bold">{settings.settingsData.name}</h2>
-            <p className="text-gray-600 text-xs">16/1 Shakkar Bazar, Cloth Market Indore</p>
-            <p className="text-gray-600 text-xs">GSTIN: 23AADCW7267K1ZX</p>
-            <p className="text-gray-600 text-xs">State: 23-Madhya Pradesh</p>
+    <div className={classes.confirmation}>
+      <div className={classes.confirmation_heading}>
+        {settings.settingsData.logo[0] && (
+          <ImageLoader
+            src={settings.settingsData.logo[0]?.url}
+            width={80}
+            height={80}
+            alt={settings.settingsData.name}
+            quality={100}
+          />
+        )}
+        {/* <h2>{t("we_have_received_your_order")}</h2> */}
+        <h6>
+          {t("order_no")}# {data.orderId}
+        </h6>
+        {/* <p>A copy of your receipt has been send to {data.billingInfo.email}</p> */}
+        <br />
+      </div>
+      <div className={classes.confirmation_body}>
+        <h5>{t("delivery_details")}</h5>
+        <div className="row">
+          <div className="col-md-6">
+            <h6>{t("delivery_for")}</h6>
+            <p>{data.billingInfo.fullName}</p>
+            <p>
+              {t("phone")} : {data.billingInfo.phone}
+            </p>
+            <br />
+            <h6>{t("address")}</h6>
+            <p>{`${data.billingInfo.house} ${data.billingInfo.state} ${data.billingInfo.zipCode} ${data.billingInfo.country}`}</p>
+          </div>
+          <div className="col-md-6">
+            <h6>{t("delivery_type")}</h6>
+            <p>{data.deliveryInfo.type}</p>
+            <br />
+            <h6>{t("payment_method")}</h6>
+            <p>{data.paymentMethod}</p>
           </div>
         </div>
-        <QRCodeCanvas value={invoiceId} size={80} />
-      </div>
-
-      {/* Invoice Title */}
-      <h3 className="text-center text-lg font-semibold border-b pb-2 mb-4">Tax Invoice</h3>
-
-      {/* Invoice Info */}
-      <div className="grid grid-cols-2 gap-6 mb-6">
-        {/* Billing Info */}
-        <div>
-          <h4 className="font-semibold text-gray-700 mb-2">Bill To</h4>
-          <p>{data.billingInfo.fullName}</p>
-          <p>{data.billingInfo.house}</p>
-          <p>
-            {data.billingInfo.city}, {data.billingInfo.zipCode}
-          </p>
-          <p>{data.billingInfo.state}</p>
-          <p>{data.billingInfo.phone}</p>
-        </div>
-
-        {/* Invoice Details */}
-        <div>
-          <h4 className="font-semibold text-gray-700 mb-2">Invoice Details</h4>
-          <p>
-            <span className="font-medium">Invoice No:</span> #{invoiceId}
-          </p>
-          <p>
-            <span className="font-medium">Order Id:</span> #{data.orderId}
-          </p>
-          <p>
-            <span className="font-medium">Order Date:</span> {formattedDate}
-          </p>
-          <p>
-            <span className="font-medium">Payment Method:</span> {data.paymentMethod}
-          </p>
-        </div>
-      </div>
-
-      {/* Products Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-200 text-sm">
-          <thead className="bg-gray-100 border-b">
-            <tr>
-              <th className="text-left py-2 px-3">Item</th>
-              <th className="text-center py-2 px-3">Qty</th>
-              <th className="text-center py-2 px-3">Unit</th>
-              <th className="text-right py-2 px-3">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.products.map((item, index) => (
-              <tr key={index} className="border-b">
-                <td className="py-2 px-3">
-                  <span className="font-medium">{item.name}</span>
-                  {item.color?.name && (
-                    <p className="text-xs text-gray-600">Color: {item.color.name}</p>
+        <h5>{t("order_summary")}</h5>
+        <div className={classes.cart_item_list}>
+          {data.products.map((item, index) => (
+            <div className={classes.cart_item} key={index}>
+              <div className={classes.cart_container}>
+                <span className={classes.cart_disc}>
+                  <b>{item.name}</b>
+                  {item.color.name && <span>Color: {item.color.name}</span>}
+                  {item.attribute.name && (
+                    <span>{`${item.attribute.for}: ${item.attribute.name}`}</span>
                   )}
-                  {item.attribute?.name && (
-                    <p className="text-xs text-gray-600">
-                      {item.attribute.for}: {item.attribute.name}
-                    </p>
-                  )}
-                </td>
-                <td className="text-center py-2 px-3">{item.qty}</td>
-                <td className="text-center py-2 px-3">Nos</td>
-                <td className="text-right py-2 px-3">
-                  {currencySymbol}
-                  {decimalBalance(item.price)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Totals */}
-      <div className="mt-6 flex justify-end">
-        <div className="w-64 space-y-1 text-sm">
-          <div className="flex justify-between">
-            <span>Amount:</span>
+                  <span>Qty: {item.qty}</span>
+                  <span>
+                    Price: {currencySymbol}.
+                    {item.price}
+                  </span>
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={classes.confirmation_pay}>
+          <div>
+            <span>{t("Total MRP")}</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {decimalBalance(data.totalPrice)}
             </span>
           </div>
-          <div className="flex justify-between">
-            <span>Discount:</span>
+          <div>
+            <span>{t("discount")}</span>
             <span>
-              {currencySymbol}
-              {decimalBalance(checkPercentage(data.totalPrice, data.coupon?.discount || 0))}
+              {currencySymbol}.
+              {decimalBalance(
+                checkPercentage(data.totalPrice, data.coupon?.discount || 0)
+              )}
             </span>
           </div>
-          <div className="flex justify-between">
-            <span>Shipping:</span>
+          <div>
+            <span>{t("Shipping Charge")}</span>
             <span>
-              {currencySymbol}
-              {decimalBalance(data.deliveryInfo.cost)}
+              {currencySymbol}.
+              {data.deliveryInfo.cost}
             </span>
           </div>
-          <div className="flex justify-between">
-            <span>GST:</span>
+          <div>
+            <span>{t("tax")}</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {decimalBalance(data.tax)}
             </span>
           </div>
-          <div className="flex justify-between font-semibold border-t pt-2">
-            <span>Total:</span>
+          <div>
+            <span>{t("total")}</span>
             <span>
-              {currencySymbol}
+              {currencySymbol}.
               {decimalBalance(data.payAmount)}
             </span>
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="mt-8 text-center text-xs text-gray-500 border-t pt-3">
-        Thank you for shopping with {settings.settingsData.name}.  
-        <br />
-        This is a computer-generated invoice.
-      </div>
     </div>
   );
-}
- 
+};
+
+export default Invoice;

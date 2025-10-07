@@ -175,56 +175,45 @@ const NavBar = () => {
             <SearchBar />
           </div>
           <div className={c.end}>
-            <Link href={"/signin"} passHref legacyBehavior>
-              <div>
-                {!session && (
-                  <Link href="/signin">
-                    <button className="btn btn-md btn-danger rounded-4 mb-2 ml-2">
-                      Sign In
-                    </button>
-                  </Link>
-                )}
-                {session && (
-                  // <Link href="/profile">
-                  //   <span>{session.user.name}</span>
-                  // </Link>
-                  <div className="dropdown">
-                    <button
-                      className="btn btn-danger dropdown-toggle mb-2 rounded border-radius-5"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <Person
-                        width={24}
-                        height={24}
-                        className="dropdown-toggle"
-                      />
-                    </button>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <Link className="dropdown-item" href="/profile">
-                          Profile
-                        </Link>
-                      </li>
-
-                      <li>
-                        <hr className="dropdown-divider" />
-                      </li>
-                      <li>
-                        <span
-                          onClick={() => signOut({ callbackUrl: "/" })}
-                          className="dropdown-item"
-                          href="/signout"
-                        >
-                          Logout
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </Link>
+            <div>
+              {!session ? (
+                <Link href="/signin" aria-label="Account">
+                  <Person width={24} height={24} />
+                </Link>
+              ) : (
+                <div className="dropdown">
+                  <a
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    aria-label="Account menu"
+                    className="d-inline-flex align-items-end"
+                  >
+                    <Person width={24} height={24} />
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" href="/profile">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <span
+                        onClick={() => signOut({ callbackUrl: "/" })}
+                        className="dropdown-item"
+                        href="/signout"
+                      >
+                        Logout
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
 
             <div onClick={goToWishList} className={c.start}>
               <Heart width={24} height={24} />
