@@ -474,47 +474,7 @@ function ProductDetailsPage({ data, error }) {
                     <hr/>
                     <div id="mweb-delivery-details" className="css-1b2x0kn">
   <div className={classes.cssswwxch}>Select Delivery Location</div>
-  <div className={classes.css2vj9xo}>
-    <div className={classes.css1ago99h}>
-      <p className={classes.csse7e7hp}>Enter the pincode of your area to check product availability and delivery options</p>
-      <form>
-        <section className={classes.inputContainer}>
-          <div className={classes.css12cxopj}>
-            <div className={classes.css1kfrrig}>
-             
-             
-      <input
-        type="text"
-        className={classes.searchInput_def}
-        placeholder={t("Enter Pincode")}
-        maxLength={6}
-        onKeyUp={setDeliveryArea}
-        ref={deliveryArea}
-      />
-      
-             
-              {/* <div className={classes.css1e46tsl}>
-                <button 
-                  type="button" 
-                  tabIndex="0" 
-                  aria-label="close" 
-                  disabled="" 
-                  className="css-1gdrk6j"
-                >Apply</button>
-              </div> */}
-            </div>
-            <span className={classes.csspus4nj}> </span>
-          </div>
-        </section>
-      </form>
-             {showPinAvailable &&(
-                 <span className="text-danger ml-1"> Delivery Not Availbale!</span>
-                )}
-                {showAvailable &&(
-                 <span className="text-success"> Delivery Availbale!</span>
-                )}
-    </div>
-  </div>
+
   <div data-at="ecom-strip" className={classes.css18wazaq}>
     <div className={classes.cssnnct6p}>
       <img 

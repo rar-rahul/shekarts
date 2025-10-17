@@ -740,7 +740,7 @@ const Checkout = () => {
                 <input type="text"
                 className="form-control mb-3"
                 defaultValue=""
-                onKeyUp={setDeliveryArea}
+                // onKeyUp={setDeliveryArea}
                 ref={deliveryArea}
                 placeholder="Enter Your Delivery Pincode"
                 maxLength={6}
