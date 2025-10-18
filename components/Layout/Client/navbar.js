@@ -162,8 +162,8 @@ const NavBar = () => {
                 {std.logo[0] && (
                   <ImageLoader
                     src={std.logo[0]?.url}
-                    width={200}
-                    height={80}
+                    width={250}
+                    height={90}
                     alt={std.name}
                   />
                 )}
