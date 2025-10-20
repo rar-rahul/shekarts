@@ -473,7 +473,7 @@ function ProductDetailsPage({ data, error }) {
                     </div>
                     <hr/>
                     <div id="mweb-delivery-details" className="css-1b2x0kn">
-  <div className={classes.cssswwxch}>Select Delivery Location</div>
+ 
 
   <div data-at="ecom-strip" className={classes.css18wazaq}>
     <div className={classes.cssnnct6p}>
