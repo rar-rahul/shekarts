@@ -8,7 +8,7 @@ import classes from "~/components/Checkout/checkout.module.css";
 import NewAddress from "~/components/Profile/addressForm";
 import HeadData from "~/components/Head";
 import GlobalModal from "~/components/Ui/Modal/modal";
-import { checkPercentage, fetchData, postData } from "~/lib/clientFunctions";
+import { checkPercentage, fetchData, postData,sheprocketPostData } from "~/lib/clientFunctions";
 import { applyCoupon, resetCart, updateBillingData } from "~/redux/cart.slice";
 import SignIn from "~/components/Auth/signin";
 import SignUp from "~/components/Auth/signup";
@@ -50,6 +50,8 @@ const Checkout = () => {
   const infoForm = useRef();
   const { t } = useTranslation();
 
+   console.log("order data", cartData.items);
+
   useEffect(() => {
     if (status === "unauthenticated") {
       setShowLoginModal(true);
@@ -60,7 +62,7 @@ const Checkout = () => {
   async function fetchShippingCharge() {
     try {
       const response = await fetchData(`/api/home/shipping`);
-      console.log("res",response)
+      
       if (response.success) {
         setShippingChargeInfo(response.shippingCharge);
       } else {
@@ -174,9 +176,9 @@ const Checkout = () => {
   const handleInfoSubmit = async (e) => {
     try {
       e.preventDefault();
-      if (!deliveryInfo.cost && !deliveryInfo.area) {
-        return toast.warning("Please Update The Delivery Information");
-      }
+      // if (!deliveryInfo.cost && !deliveryInfo.area) {
+      //   return toast.warning("Please Update The Delivery Information");
+      // }
       if (!preInfo.billingInfo?.fullName && !preInfo.shippingInfo?.fullName) {
         return toast.warning("Please Update The Billing Information");
       }
@@ -294,87 +296,76 @@ const Checkout = () => {
       },
     };
 
-  const curiorData = { 
-    "data": {
-       "shipments": [
-            {
-                "waybill": "",
-                "order": "11105874456",
-                "sub_order": "BA",
-                "order_date": "08-08-2024",
-                "total_amount": "299",
-                "name": "Raut P",
-                "company_name": "",
-                "add": "JP Main Road",
-                "add2": "",
-                "add3": "",
-                "pin": "440034",
-                "city": "",
-                "state": "",
-                "country": "IN",
-                "phone": "8007656192",
-                "alt_phone": "",
-                "email": "rahulraut430@gmail.com",
-                "is_billing_same_as_shipping": "Yes",
-                "billing_name": "",
-                "billing_company_name": "",
-                "billing_add": "",
-                "billing_add2": "",
-                "billing_add3": "",
-                "billing_pin": "",
-                "billing_city": "",
-                "billing_state": "",
-                "billing_country": "",
-                "billing_phone": "",
-                "billing_alt_phone": "",
-                "billing_email": "",
-                "products":[
-                    {
-                        "product_name": "Jezara Pure Vitamin-C Face Wash | 100% Oil Free Skin",
-                        "product_sku": "SKU003",
-                        "product_quantity": "1",
-                        "product_price": "199",
-                        "product_tax_rate": "35.82",
-                        "product_hsn_code": "HSN500",
-                        "product_discount": "30"
-                    }
-                ],
-                "shipment_length": "10",
-                "shipment_width": "10",
-                "shipment_height": "10",
-                "weight": "0.24",
-                "shipping_charges": "0",
-                "giftwrap_charges": "",
-                "transaction_charges": "",
-                "total_discount": "00",
-                "first_attemp_discount": "",
-                "cod_charges": "",
-                "advance_amount": "",
-                "cod_amount": "0",
-                "payment_mode": "Prepaid",
-                "reseller_name": "",
-                "eway_bill_number": "",
-                "gst_number": "",
-                "return_address_id": "1293",
-                "api_source" : "1",
-                "store_id" :"",
-            }
-         ], 
-      "pickup_address_id" :"1293",
-      "access_token" :"5a7b40197cd919337501dd6e9a3aad9a", 
-      "secret_key" : "2b54c373427be180d1899400eeb21aab", 
-      "logistics" : "Delhivery",  
-      "s_type" : "", 
-      "order_type" : "" 
-     }
+   
+
+   
+      const sheProketOrder = {
+     "order_id": Math.floor(100000 + Math.random() * 900000),
+       "order_date": new Date().toISOString(),
+      "pickup_location": "work",
+      "comment": "Reseller: M/s Goku",
+      "billing_customer_name": data.billingInfo.fullName,
+      "billing_last_name": "Last Name",
+      "billing_address": data.billingInfo.house,
+      "billing_address_2": "Near Hokage House",
+      "billing_city": data.billingInfo.city,
+      "billing_pincode": data.billingInfo.zipCode,
+      "billing_state": data.billingInfo.state,
+      "billing_country": "India",
+      "billing_email": data.billingInfo.email,
+      "billing_phone": data.billingInfo.phone,
+      "shipping_is_billing": true,
+      "shipping_customer_name": "",
+      "shipping_last_name": "",
+      "shipping_address": "",
+      "shipping_address_2": "",
+      "shipping_city": "",
+      "shipping_pincode":"",
+      "shipping_country": "",
+      "shipping_state": "",
+      "shipping_email": "",
+      "shipping_phone": "",
+       "order_items": [
+    {
+      "name": "Kunai",
+      "sku": "chakra123",
+      "units": 10,
+      "selling_price": 900,
     }
+  ],
+      "payment_method": "Cod",
+      "shipping_charges": 0,
+      "giftwrap_charges": 0,
+      "transaction_charges": 0,
+      "total_discount": 0,
+      "sub_total": finalPrice,
+      "length": 10,
+      "breadth": 15,
+      "height": 20,
+      "weight": 1.5
+    }
+
+    
     const url = `/api/order/new`;
     const curiUrl = `https://pre-alpha.ithinklogistics.com/api_v3/order/add.json`;
+    const sheProketOrderApiUrl = `https://apiv2.shiprocket.in/v1/external/orders/create/adhoc`;
+    const sheProketAuthUrl = `https://apiv2.shiprocket.in/v1/external/auth/login`;
     const formData = new FormData();
     formData.append("checkoutData", JSON.stringify(data));
+
     const response = await postData(url, formData);
-    const delresponse = await postData(curiUrl, curiorData);
-    console.log(delresponse);
+    const sheProketAuth = await postData(sheProketAuthUrl, {
+  "email":"rahulraut430@gmail.com",
+  "password":"$qUu3GmE8Z@Hm1$@"
+});
+
+
+
+    const sheprocketPostResponce = await sheprocketPostData(sheProketOrderApiUrl, sheProketOrder, sheProketAuth.token);
+    //const delresponse = await postData(curiUrl, curiorData);
+   // console.log(delresponse);
+    console.log(sheprocketPostResponce);
+   
     response && response.success
       ? (dispatch(resetCart()),
         toast.success("Order successfully placed"),
@@ -387,9 +378,9 @@ const Checkout = () => {
       if (cartData.items.length === 0) {
         return toast.warning("Your Cart Is Empty");
       }
-      if (!deliveryInfo.cost && !deliveryInfo.area) {
-        return toast.warning("Please Update The Delivery Information");
-      }
+      // if (!deliveryInfo.cost && !deliveryInfo.area) {
+      //   return toast.warning("Please Update The Delivery Information");
+      // }
       if (!preInfo.billingInfo?.fullName && !preInfo.shippingInfo?.fullName) {
         return toast.warning("Please Update The Billing Information");
       }
