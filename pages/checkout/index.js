@@ -348,33 +348,13 @@ const Checkout = () => {
       "weight": 1.5
     }
 
-   
-
     const url = `/api/order/new`;
     const sheProketurl = `/api/sheproket/order`;
-    const curiUrl = `https://pre-alpha.ithinklogistics.com/api_v3/order/add.json`;
-    const sheProketOrderApiUrl = `https://apiv2.shiprocket.in/v1/external/orders/create/adhoc`;
-    const sheProketAuthUrl = `https://apiv2.shiprocket.in/v1/external/auth/login`;
-    const apiUserSheproketEmail = `${process.env.NEXT_PUBLIC_SHEPROKET_API_USER_EMAIL}`;
     const formData = new FormData();
     formData.append("checkoutData", JSON.stringify(data));
-    const response = await postData(url, formData);
-    const sheProketAuth = await postData(process.env.NEXT_PUBLIC_SHEPROKET_AUTH_API_URL, {
-  "email":apiUserSheproketEmail,
-  "password":"$qUu3GmE8Z@Hm1$@"
-  });
-
-
-    const sheprocketPostResponce = await sheprocketPostData(process.env.NEXT_PUBLIC_SHEPROKET_ORDER_API_URL, sheProketOrder, sheProketAuth.token);
-    const sheProketAwb = await sheprocketPostData(process.env.NEXT_PUBLIC_SHEPROKET_AWB_API_URL,{
-  "shipment_id":sheprocketPostResponce.shipment_id,
-  },sheProketAuth.token);
-    //const delresponse = await postData(curiUrl, curiorData);
-   // console.log(delresponse);
-    const sheproketorder = await postData(sheProketurl, sheProketOrder);
-    console.log(sheproketorder);
-    debugger
-   
+    const response = await postData(url, formData);//order save in db
+    const sheproketorder = await postData(sheProketurl, sheProketOrder);//order for sheproket cms
+    console.log("sheproketorder", sheproketorder);
     response && response.success
       ? (dispatch(resetCart()),
         toast.success("Order successfully placed"),
