@@ -55,6 +55,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload });
       }
+      
       setStorageData(CART, state);
     },
     addVariableProductToCart: (state, action) => {

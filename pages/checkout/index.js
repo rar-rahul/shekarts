@@ -283,6 +283,12 @@ const Checkout = () => {
     (deliveryInfo.cost || 0) -
     discountPrice;
 
+    console.log(process.env.NEXT_PUBLIC_SHEPROKET_AUTH_API_URL)
+    console.log(process.env.NEXT_PUBLIC_SHEPROKET_ORDER_API_URL)
+    console.log(process.env.NEXT_PUBLIC_SHEPROKET_API_USER_EMAIL)
+    console.log(process.env.NEXT_PUBLIC_SHEPROKET_API_USER_PASSWORD)
+    console.log(cartData.items)
+
   async function processOrder(method) {
     const data = {
       coupon: cartData.coupon,
@@ -296,18 +302,22 @@ const Checkout = () => {
       },
     };
 
-   
+    const updatedCartList = data.products.map(item => ({
+        name: item.name,
+        sku: item.sku,
+        units: item.qty,
+        selling_price: item.price,
+      }));
 
    
-      const sheProketOrder = {
+ const sheProketOrder = {
      "order_id": Math.floor(100000 + Math.random() * 900000),
-       "order_date": new Date().toISOString(),
-      "pickup_location": "work",
+      "order_date": new Date().toISOString(),
+      "pickup_location": "warehouse",
       "comment": "Reseller: M/s Goku",
       "billing_customer_name": data.billingInfo.fullName,
-      "billing_last_name": "Last Name",
+      "billing_last_name": "Uzumaki",
       "billing_address": data.billingInfo.house,
-      "billing_address_2": "Near Hokage House",
       "billing_city": data.billingInfo.city,
       "billing_pincode": data.billingInfo.zipCode,
       "billing_state": data.billingInfo.state,
@@ -325,14 +335,7 @@ const Checkout = () => {
       "shipping_state": "",
       "shipping_email": "",
       "shipping_phone": "",
-       "order_items": [
-    {
-      "name": "Kunai",
-      "sku": "chakra123",
-      "units": 10,
-      "selling_price": 900,
-    }
-  ],
+      "order_items": updatedCartList,
       "payment_method": "Cod",
       "shipping_charges": 0,
       "giftwrap_charges": 0,
@@ -345,26 +348,32 @@ const Checkout = () => {
       "weight": 1.5
     }
 
-    
+   
+
     const url = `/api/order/new`;
+    const sheProketurl = `/api/sheproket/order`;
     const curiUrl = `https://pre-alpha.ithinklogistics.com/api_v3/order/add.json`;
     const sheProketOrderApiUrl = `https://apiv2.shiprocket.in/v1/external/orders/create/adhoc`;
     const sheProketAuthUrl = `https://apiv2.shiprocket.in/v1/external/auth/login`;
+    const apiUserSheproketEmail = `${process.env.NEXT_PUBLIC_SHEPROKET_API_USER_EMAIL}`;
     const formData = new FormData();
     formData.append("checkoutData", JSON.stringify(data));
-
     const response = await postData(url, formData);
-    const sheProketAuth = await postData(sheProketAuthUrl, {
-  "email":"rahulraut430@gmail.com",
+    const sheProketAuth = await postData(process.env.NEXT_PUBLIC_SHEPROKET_AUTH_API_URL, {
+  "email":apiUserSheproketEmail,
   "password":"$qUu3GmE8Z@Hm1$@"
-});
+  });
 
 
-
-    const sheprocketPostResponce = await sheprocketPostData(sheProketOrderApiUrl, sheProketOrder, sheProketAuth.token);
+    const sheprocketPostResponce = await sheprocketPostData(process.env.NEXT_PUBLIC_SHEPROKET_ORDER_API_URL, sheProketOrder, sheProketAuth.token);
+    const sheProketAwb = await sheprocketPostData(process.env.NEXT_PUBLIC_SHEPROKET_AWB_API_URL,{
+  "shipment_id":sheprocketPostResponce.shipment_id,
+  },sheProketAuth.token);
     //const delresponse = await postData(curiUrl, curiorData);
    // console.log(delresponse);
-    console.log(sheprocketPostResponce);
+    const sheproketorder = await postData(sheProketurl, sheProketOrder);
+    console.log(sheproketorder);
+    debugger
    
     response && response.success
       ? (dispatch(resetCart()),
