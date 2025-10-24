@@ -134,8 +134,8 @@ function MyApp({ Component, pageProps }) {
         </GlobalLayout>
       </CheckAuth>
       <ToastContainer
-        position="top-right"
-        autoClose={2000}
+        position="bottom-right"
+        autoClose={1000}
         hideProgressBar
         newestOnTop={true}
         closeOnClick
