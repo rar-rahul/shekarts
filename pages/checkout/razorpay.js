@@ -29,10 +29,61 @@ export default function RazorPay() {
           id,
         },
       };
+
+      const updatedCartList = data.products.map(item => ({
+        name: item.name,
+        sku: item.sku,
+        units: item.qty,
+        selling_price: item.price,
+      }));
+
+   
+ const sheProketOrder = {
+     "order_id": Math.floor(100000 + Math.random() * 900000),
+      "order_date": new Date().toISOString(),
+      "pickup_location": "warehouse",
+      "comment": "Reseller: M/s Goku",
+      "billing_customer_name": data.billingInfo.fullName,
+      "billing_last_name": "Uzumaki",
+      "billing_address": data.billingInfo.house,
+      "billing_city": data.billingInfo.city,
+      "billing_pincode": data.billingInfo.zipCode,
+      "billing_state": data.billingInfo.state,
+      "billing_country": "India",
+      "billing_email": data.billingInfo.email,
+      "billing_phone": data.billingInfo.phone,
+      "shipping_is_billing": true,
+      "shipping_customer_name": "",
+      "shipping_last_name": "",
+      "shipping_address": "",
+      "shipping_address_2": "",
+      "shipping_city": "",
+      "shipping_pincode":"",
+      "shipping_country": "",
+      "shipping_state": "",
+      "shipping_email": "",
+      "shipping_phone": "",
+      "order_items": updatedCartList,
+      "payment_method": "Cod",
+      "shipping_charges": 0,
+      "giftwrap_charges": 0,
+      "transaction_charges": 0,
+      "total_discount": 0,
+      "sub_total": finalPrice,
+      "length": 10,
+      "breadth": 15,
+      "height": 20,
+      "weight": 1.5
+    } 
+
+
       const url = `/api/order/new`;
+      const sheProketurl = `/api/sheproket/order`;
       const formData = new FormData();
       formData.append("checkoutData", JSON.stringify(data));
       const responseData = await postData(url, formData);
+      const sheproketorder = await postData(sheProketurl, sheProketOrder);//order for sheproket cms
+      console.log("Sheproket Order Response:", sheproketorder);
       if (responseData && responseData.success) {
         dispatch(resetCart());
         toast.success("Order successfully placed");

@@ -283,11 +283,6 @@ const Checkout = () => {
     (deliveryInfo.cost || 0) -
     discountPrice;
 
-    console.log(process.env.NEXT_PUBLIC_SHEPROKET_AUTH_API_URL)
-    console.log(process.env.NEXT_PUBLIC_SHEPROKET_ORDER_API_URL)
-    console.log(process.env.NEXT_PUBLIC_SHEPROKET_API_USER_EMAIL)
-    console.log(process.env.NEXT_PUBLIC_SHEPROKET_API_USER_PASSWORD)
-    console.log(cartData.items)
 
   async function processOrder(method) {
     const data = {
